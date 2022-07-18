@@ -1,0 +1,203 @@
+#!/bin/sh
+
+# check command line option for --help
+if [ "$1" = "--help" ] ; then 
+	 echo " "
+	 echo "inmage_config_build [--help | --clean] "
+	 echo " "
+	 echo "Configures and builds the libxml2 third party package."
+	 echo " "
+	 echo " clean : cleans (deletes) all build and configuration outputs."
+	 echo "         You will need to rerun inmage_config_build to regenreate all the data"
+	 echo "         This maybe needed if their is a failure during the initial config build"
+	 echo " --help: display this message"
+	 echo " "
+	 exit 0
+fi
+
+# go to correct directory
+DIR=`dirname $0`
+cd "$DIR"
+
+CWD=`pwd`
+
+# play it safe and make sure configure is executable
+chmod 777 ./configure
+
+# get the specific distro version and gcc version that will be used to create the final lib dirs
+if [ "" = "$X_SPECIFIC" ] ; then 
+	 SPECIFIC_VERSION=`../../../host/get-specific-version-info`
+else
+	 SPECIFIC_VERSION="$X_SPECIFIC"
+fi
+	 
+# check command line option for --clean
+if [ "$1" = "--clean" ] ; then 
+	 if [ -d config_release ] ; then 
+		  cd config_release
+		  gmake distclean
+		  cd ..
+	 fi
+	 if [ -d config_debug ] ; then
+		  cd config_debug
+		  gmake distclean
+		  cd ..
+	 fi
+	 rm -Rf config_release config_debug lib/${SPECIFIC_VERSION}/release/* lib/${SPECIFIC_VERSION}/debug/*
+	 exit 0
+fi
+
+# set up defaults
+if [ "" = "$X_ARCH" ] ; then 
+	 SYSTEM=`uname`
+else
+	 SYSTEM="$X_ARCH"
+fi
+
+case $SYSTEM in
+	 SunOS)
+		  NOSSE2=
+		  BITS=`isainfo -b`
+		  echo "BITS: ${BITS}"
+		  if [ "64" = "${BITS}" ] ; then
+			USE64BIT=-m64
+		  else
+			USE64BIt=
+		  fi
+		  PTHREAD=-pthreads
+		  LPTHREAD=-lpthread
+		  SYMTAB_FLAG=-gdwarf-2
+		  TSFLAG=
+		  ;;
+	 Linux)
+		  NOSSE2=-mno-sse2
+		  USE64BIT=	 
+		  PTHREAD=-pthread
+		  LPTHREAD=-lpthread
+		  SYMTAB_FLAG=-g
+		  TSFLAG=
+		  ;;
+	 AIX)
+		  NOSSE2=
+		  BITS=`bootinfo -K`
+		  if [ "64" = ${BITS} ] ; then
+			USE64BIT=-maix64
+			OBJECT_MODE=64
+			export OBJECT_MODE
+		  else
+			USE64BIT=
+		  fi
+		  IPV6='--disable-ipv6'
+		  PTHREAD=-pthread
+		  LPTHREAD=-lpthread
+		  SYMTAB_FLAG=-gxcoff
+		  TSFLAG=-DTHREAD_SAFE
+          CONFIG_PARAM="--with-iconv=no"
+		  ;;
+	 *)
+		  echo "ERROR running $0 (in $DIR/)"
+		  echo "  platform $SYSTEM not supported yet"
+		  echo "  see inmage-make-system-users-guid.txt for details on adding support"
+		  exit 1
+		  ;;
+esac		  
+
+# set up defaults
+DEFAULT_CFLAGS="-D_LARGEFILE_SOURCE=1 -D_LARGEFILE64_SOURCE=1 -D_FILE_OFFSET_BITS=64 ${NOSSE2} ${USE64BIT} ${PTHREAD} ${SYMTAB_FLAG} ${TSFLAG}"
+
+LDFLAGS="${USE64BIT} ${PTHREAD} ${LPTHREAD}"
+export LDFLAGS
+
+# Pass --without-lzma as an additional flag in case of RHEL7-64 and SLES11-SP4-64
+if [ -f /etc/redhat-release ]; then
+    if grep -q 'Red Hat Enterprise Linux Server release 7.*' /etc/redhat-release || \
+       grep -q 'CentOS Linux release 7.*' /etc/redhat-release; then
+        ADDT_FLAGS="--without-lzma"
+    fi
+fi
+
+if [ -f /etc/SuSE-release ]; then
+    if grep -q 'VERSION = 11' /etc/SuSE-release && grep -q 'PATCHLEVEL = 4' /etc/SuSE-release; then
+        ADDT_FLAGS="--without-lzma"
+    fi
+fi
+
+#pkg-config unable to locate pkg.m4. Running below command to detect the pkg.m4.
+aclocal && libtoolize --force && autoreconf -i -v -s -I /usr/share/aclocal
+
+# create dirs as needed
+mkdir -p lib
+mkdir -p lib/${SPECIFIC_VERSION}
+mkdir -p lib/${SPECIFIC_VERSION}/release
+mkdir -p lib/${SPECIFIC_VERSION}/debug
+mkdir -p include/${SPECIFIC_VERSION}
+mkdir -p config_release
+mkdir -p config_debug
+
+# configure debug
+cd config_debug
+if [ ! -f ran_config ] ; then 
+	 if [ -f Makefile ] ; then
+		  gmake distclean
+	 fi
+	 CFLAGS="-DDEBUG ${DEFAULT_CFLAGS}"
+	 export CFLAGS
+	 ../configure ${CONFIG_PARAM}  --prefix=${CWD}/config_debug/build --exec-prefix=${CWD}/config_debug/build --oldincludedir=${CWD}/config_debug/build/old ${ADDT_FLAGS}
+	 if [ 0 -ne $? ] ; then 
+		  # possible had configure run in the top level dir, try to clean and re-run configure
+		  cd ..
+		  make distclean
+		  cd config_debug
+		  ../configure  ${CONFIG_PARAM} --prefix=${CWD}/config_debug/build --exec-prefix=${CWD}/config_debug/build --oldincludedir=${CWD}/config_debug/build/old ${ADDT_FLAGS}
+		  if [ 0 -ne $? ] ; then 
+				echo "error configuring libxml2"
+				exit 1
+		  fi		  
+	 fi
+	 touch ran_config
+fi
+
+# build debug
+gmake
+gmake install
+
+# copy files to final destination
+# no need to copy as we did an install that placed
+# what is needed into the correct dirs
+
+# back to top level of current package
+cd ..
+
+# configure release
+cd config_release
+if [ ! -f ran_config ] ; then 
+	 if [ -f Makefile ] ; then
+		  gmake distclean
+	 fi
+	 CFLAGS="${DEFAULT_CFLAGS}"
+	 export CFLAGS
+	 ../configure ${CONFIG_PARAM} --prefix=${CWD}/config_release/build --exec-prefix=${CWD}/config_release/build --oldincludedir=${CWD}/config_release/build/old ${ADDT_FLAGS}
+	 if [ 0 -ne $? ] ; then 
+		  # possible had configure run in the top level dir, try to clean and re-run configure
+		  cd ..
+		  make distclean
+		  cd config_release
+		  ../configure ${CONFIG_PARAM} --prefix=${CWD}/config_release/build --exec-prefix=${CWD}/config_release/build --oldincludedir=${CWD}/config_release/build/old ${ADDT_FLAGS}
+		  if [ 0 -ne $? ] ; then 
+				echo "error configuring libxml2"
+				exit 1
+		  fi		  
+	 fi
+	 touch ran_config
+fi
+
+# build release
+gmake
+gmake install
+
+# copy files to final destination
+# no need to copy as we did an install that placed
+# what is needed into the correct dirs
+
+exit 0
+

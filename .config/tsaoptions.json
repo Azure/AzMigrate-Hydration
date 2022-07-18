@@ -1,0 +1,9 @@
+{
+   "instanceUrl":"https://msazure.visualstudio.com",
+   "projectName":"Private-Azure-Hydration",
+   "areaPath":"Private-Azure-Hydration",
+   "iterationPath": "Private-Azure-Hydration\Sprint 1",
+   "notificationAliases":[
+      "shamish@microsoft.com"
+   ]
+}

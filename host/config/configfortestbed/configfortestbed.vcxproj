@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A71FEC2E-0B8D-4478-93B7-EEBB1FC95BD7}</ProjectGuid>
+    <RootNamespace>configfortestbed</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <SpectreMitigation>Spectre</SpectreMitigation>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="..\..\win-rules.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="..\..\win-rules.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="..\..\win-rules.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="..\..\win-rules.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.21005.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>Debug\</OutDir>
+    <IntDir>Debug\</IntDir>
+    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>Release\</OutDir>
+    <IntDir>Release\</IntDir>
+    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PreBuildEvent>
+      <Command>makeserfortestbed.bat $(IntDir)</Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\$(INM_MD5_INCLUDES);..\..\errorexception;..\..\cxpslib;..\..\curlwrapperlib;..\$(OPENSSL_INCLUDES);..\..\common;..\..\inmsafeint;..\..\inmsafeint\win;..\..\inmsafecapis;..\..\inmsafecapis\win;..\..\common\win32;..\..\s2libs\thread;..\..\s2libs\common;..\win;.;..\$(ACE_INCLUDES);..\..\config;.\win;..\$(BOOST_INCLUDES);..\..\cdplibs;..\cdplibs\v1;..\cdplibs\v3;..;..\$(CURL_INCLUDES);..\..\log;..\..\InmXmlParser;..\$(SIGSLOT_INCLUDES);..\$(ESJSON_INCLUDES);..\..\securitylib;..\..\securitylib\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;SV_WINDOWS=1;WIN32_LEAN_AND_MEAN;_WIN32_WINNT=0x0502;ACE_AS_STATIC_LIBS;_LARGEFILE_SOURCE=1;_LARGEFILE64_SOURCE=1;_FILE_OFFSET_BITS=64;CURL_STATICLIB;TESTBED_DEBUG;SV_USES_LONGPATHS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <ProgramDataBaseFileName>$(IntDir)configfortestbed.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)configfortestbed.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PreBuildEvent>
+      <Command>makeserfortestbed.bat $(IntDir)</Command>
+    </PreBuildEvent>
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\$(INM_MD5_INCLUDES);..\..\common;..\..\inmsafeint;..\..\inmsafeint\win;..\..\inmsafecapis;..\..\inmsafecapis\win;..\..\common\win32;..\..\s2libs\thread;..\..\s2libs\common;..\win;.;..\$(ACE_INCLUDES);..\..\config;.\win;..\$(BOOST_INCLUDES);..\..\cdplibs;..\cdplibs\v1;..\cdplibs\v3;..;..\$(CURL_INCLUDES);..\..\log;..\..\InmXmlParser;..\$(SIGSLOT_INCLUDES);..\..\securitylib;..\..\securitylib\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;SV_WINDOWS=1;WIN32_LEAN_AND_MEAN;_WIN32_WINNT=0x0502;ACE_AS_STATIC_LIBS;_LARGEFILE_SOURCE=1;_LARGEFILE64_SOURCE=1;_FILE_OFFSET_BITS=64;CURL_STATICLIB;TESTBED_DEBUG;SV_USES_LONGPATHS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <ProgramDataBaseFileName>$(IntDir)configfortestbed.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)configfortestbed.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PreBuildEvent>
+      <Command>makeserfortestbed.bat $(IntDir)</Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>..\$(INM_MD5_INCLUDES);..\..\errorexception;..\..\cxpslib;..\..\curlwrapperlib;..\$(OPENSSL_INCLUDES);..\..\common;..\..\inmsafeint;..\..\inmsafeint\win;..\..\inmsafecapis;..\..\inmsafecapis\win;..\..\common\win32;..\..\s2libs\thread;..\..\s2libs\common;..\win;.;..\$(ACE_INCLUDES);..\..\config;.\win;..\$(BOOST_INCLUDES);..\..\cdplibs;..\cdplibs\v1;..\cdplibs\v3;..;..\$(CURL_INCLUDES);..\..\log;..\..\InmXmlParser;..\$(SIGSLOT_INCLUDES);..\$(ESJSON_INCLUDES);..\..\securitylib;..\..\securitylib\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;SV_WINDOWS=1;WIN32_LEAN_AND_MEAN;_WIN32_WINNT=0x0502;ACE_AS_STATIC_LIBS;_LARGEFILE_SOURCE=1;_LARGEFILE64_SOURCE=1;_FILE_OFFSET_BITS=64;CURL_STATICLIB;TESTBED_DEBUG;SV_USES_LONGPATHS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)configfortestbed.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PreBuildEvent>
+      <Command>makeserfortestbed.bat $(IntDir)</Command>
+    </PreBuildEvent>
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>..\$(INM_MD5_INCLUDES);..\..\common;..\..\inmsafeint;..\..\inmsafeint\win;..\..\inmsafecapis;..\..\inmsafecapis\win;..\..\common\win32;..\..\s2libs\thread;..\..\s2libs\common;..\win;.;..\$(ACE_INCLUDES);..\..\config;.\win;..\$(BOOST_INCLUDES);..\..\cdplibs;..\cdplibs\v1;..\cdplibs\v3;..;..\$(CURL_INCLUDES);..\..\log;..\..\InmXmlParser;..\$(SIGSLOT_INCLUDES);..\..\securitylib;..\..\securitylib\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;SV_WINDOWS=1;WIN32_LEAN_AND_MEAN;_WIN32_WINNT=0x0502;ACE_AS_STATIC_LIBS;_LARGEFILE_SOURCE=1;_LARGEFILE64_SOURCE=1;_FILE_OFFSET_BITS=64;CURL_STATICLIB;TESTBED_DEBUG;SV_USES_LONGPATHS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)configfortestbed.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="cdpdeftestbed.cpp" />
+    <ClCompile Include="cdpsnapshotrequesttestbed.cpp" />
+    <ClCompile Include="configuratorrpctestbed.cpp" />
+    <ClCompile Include="configurevxagentproxytestbed.cpp" />
+    <ClCompile Include="configwrappertestbed.cpp" />
+    <ClCompile Include="fileconfiguratorextestbed.cpp" />
+    <ClCompile Include="fileconfiguratortestbed.cpp" />
+    <ClCompile Include="initialsettingstestbed.cpp" />
+    <ClCompile Include="marshaltestbed.cpp" />
+    <ClCompile Include="retentioninformationtestbed.cpp" />
+    <ClCompile Include="retentionsettingstestbed.cpp" />
+    <ClCompile Include="rpcconfiguratortestbed.cpp" />
+    <ClCompile Include="serializeatconfigmanagersettingstestbed.cpp" />
+    <ClCompile Include="serializecdpsnapshotrequesttestbed.cpp" />
+    <ClCompile Include="serializeinitialsettingstestbed.cpp" />
+    <ClCompile Include="serializeprismsettingstestbed.cpp" />
+    <ClCompile Include="serializeretentioninformationtestbed.cpp" />
+    <ClCompile Include="serializeretentionsettingstestbed.cpp" />
+    <ClCompile Include="serializeswitchinitialsettingstestbed.cpp" />
+    <ClCompile Include="serializetransport_settingstestbed.cpp" />
+    <ClCompile Include="serializevolumegroupsettingstestbed.cpp" />
+    <ClCompile Include="svconfigtestbed.cpp" />
+    <ClCompile Include="svsemaphoretestbed.cpp" />
+    <ClCompile Include="switchinitialsettingstestbed.cpp" />
+    <ClCompile Include="talwrappertestbed.cpp" />
+    <ClCompile Include="unmarshaltestbed.cpp" />
+    <ClCompile Include="volumegroupsettingstestbed.cpp" />
+    <ClCompile Include="xmlizeatconfigmanagersettingstestbed.cpp" />
+    <ClCompile Include="xmlizecdpsnapshotrequesttestbed.cpp" />
+    <ClCompile Include="xmlizeinitialsettingstestbed.cpp" />
+    <ClCompile Include="xmlizeprismsettingstestbed.cpp" />
+    <ClCompile Include="xmlizeretentioninformationtestbed.cpp" />
+    <ClCompile Include="xmlizeretentionsettingstestbed.cpp" />
+    <ClCompile Include="xmlizetransport_settingstestbed.cpp" />
+    <ClCompile Include="xmlizevolumegroupsettingstestbed.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\atconfigmanagersettings.h" />
+    <ClInclude Include="..\cdpsnapshotrequest.h" />
+    <ClInclude Include="..\configurator2.h" />
+    <ClInclude Include="..\configuratorrpc.h" />
+    <ClInclude Include="..\configureclustermanager.h" />
+    <ClInclude Include="..\configurecxagent.h" />
+    <ClInclude Include="..\configurereplicationpair.h" />
+    <ClInclude Include="..\configurereplicationpairmanager.h" />
+    <ClInclude Include="..\configureretentionmanager.h" />
+    <ClInclude Include="..\configureservice.h" />
+    <ClInclude Include="..\configureservicemanager.h" />
+    <ClInclude Include="..\configuresnapshot.h" />
+    <ClInclude Include="..\configuresnapshotmanager.h" />
+    <ClInclude Include="..\configurevolume.h" />
+    <ClInclude Include="..\configurevolumegroups.h" />
+    <ClInclude Include="..\configurevolumemanager.h" />
+    <ClInclude Include="..\configurevolumemanagerproxy.h" />
+    <ClInclude Include="..\configurevxagent.h" />
+    <ClInclude Include="..\configurevxagentproxy.h" />
+    <ClInclude Include="..\configurevxtransport.h" />
+    <ClInclude Include="..\configwrapper.h" />
+    <ClInclude Include="..\cxproxy.h" />
+    <ClInclude Include="..\fileconfigurator.h" />
+    <ClInclude Include="..\initialsettings.h" />
+    <ClInclude Include="..\win\localconfigurator.h" />
+    <ClInclude Include="..\marshal.h" />
+    <ClInclude Include="..\rpcconfigurator.h" />
+    <ClInclude Include="serializeatconfigmanagersettings.h" />
+    <ClInclude Include="serializecdpsnapshotrequest.h" />
+    <ClInclude Include="serializeinitialsettings.h" />
+    <ClInclude Include="serializeprismsettings.h" />
+    <ClInclude Include="serializeretentioninformation.h" />
+    <ClInclude Include="serializeretentionsettings.h" />
+    <ClInclude Include="serializeswitchinitialsettings.h" />
+    <ClInclude Include="serializetransport_settings.h" />
+    <ClInclude Include="serializevolumegroupsettings.h" />
+    <ClInclude Include="..\sigslot.h" />
+    <ClInclude Include="..\snapshotmanagerproxy.h" />
+    <ClInclude Include="..\svconfig.h" />
+    <ClInclude Include="..\svsemaphore.h" />
+    <ClInclude Include="..\switchinitialsettings.h" />
+    <ClInclude Include="..\talwrapper.h" />
+    <ClInclude Include="..\throttlesettings.h" />
+    <ClInclude Include="..\transport_settings.h" />
+    <ClInclude Include="..\unmarshal.h" />
+    <ClInclude Include="..\volumegroupsettings.h" />
+    <ClInclude Include="xmlizeatconfigmanagersettings.h" />
+    <ClInclude Include="xmlizecdpsnapshotrequest.h" />
+    <ClInclude Include="xmlizeinitialsettings.h" />
+    <ClInclude Include="xmlizeprismsettings.h" />
+    <ClInclude Include="xmlizeretentioninformation.h" />
+    <ClInclude Include="xmlizeretentionsettings.h" />
+    <ClInclude Include="xmlizetransport_settings.h" />
+    <ClInclude Include="xmlizevolumegroupsettings.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\makeserialize.vcxproj">
+      <Project>{35cd2212-4760-4075-883a-b680b0567cfa}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

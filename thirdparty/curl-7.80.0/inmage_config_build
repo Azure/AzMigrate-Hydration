@@ -1,0 +1,234 @@
+#!/bin/sh
+
+# check command line option for --help
+if [ "$1" = "--help" ] ; then 
+	cat <<EOF
+
+	Usage: $0 [--help | --clean]
+
+	Purpose: Builds libcurl.a with c-ares-1.18.1 support. Needs libcares.a (which is built by this script automatically).
+
+		--clean :	cleans (deletes) all build and configuration outputs including the libraries built previously
+				You will need to rerun inmage_config_build without any arguments to regenerate libcurl.a
+
+		--help  :	displays this help
+
+EOF
+	exit 0
+fi
+
+# go to correct directory
+DIR="`dirname $0`"
+DIR="`sh ${DIR}/../getfulldirname $DIR`"
+cd "$DIR"
+
+# play it safe and make sure configure is executable
+chmod 777 ./configure
+
+# set up default compiler options
+if [ "" = "$X_ARCH" ] ; then 
+	 SYSTEM=`uname`
+else
+	 SYSTEM="$X_ARCH"
+fi
+
+case $SYSTEM in
+	 SunOS)
+		  NOSSE2=
+		  BITS=`isainfo -b`
+		  if [ "64" = "${BITS}" ] ; then
+				USE64BIT=-m64
+		  else
+				USE64BIt=
+		  fi	 
+		  PTHREAD=-pthreads
+		  LPTHREAD=-lpthread
+		  SYMTAB_FLAG=-gdwarf-2
+		  TSFLAG=
+		  ;;
+	 Linux)
+		  NOSSE2=-mno-sse2
+		  USE64BIT=
+		  PTHREAD=-pthread
+		  LPTHREAD=-lpthread
+		  SYMTAB_FLAG=-g
+		  TSFLAG=
+		  ;;
+	AIX)
+		  NOSSE2=
+		  BITS=`bootinfo -K`
+		  if [ "64" = ${BITS} ] ; then
+					USE64BIT=-maix64
+					OBJECT_MODE=64
+					export OBJECT_MODE
+		  else
+					USE64BIT=
+		  fi
+		  IPV6='--disable-ipv6'
+		  PTHREAD=-pthread
+		  LPTHREAD=-lpthread
+		  SYMTAB_FLAG=-gxcoff
+		  TSFLAG=-DTHREAD_SAFE
+		  ;;
+	 *)
+		  echo "ERROR running $0 (in $DIR/)"
+		  echo "  platform $SYSTEM not supported yet"
+		  echo "  see inmage-make-system-users-guid.txt for details on adding support"
+		  exit 1
+		  ;;
+esac		  
+
+# need to get the thirdparty dir
+# we know that for curl inmage_config_build is directly under the curl dir 
+# so we just need to get current dir and then get the dirname of that
+THIRDPARTY_DIR=`pwd | xargs dirname`
+
+# get the specific distro version and gcc version that will be used to create the final lib dirs
+if [ "" = "$X_SPECIFIC" ] ; then 
+	 SPECIFIC_VERSION=`../../host/get-specific-version-info`
+else
+	 SPECIFIC_VERSION="$X_SPECIFIC"
+fi
+
+# check command line option for --clean
+if [ "$1" = "--clean" ] ; then 
+	for bldconfig in release debug
+	do
+		# Curl part
+		curlconfigdir="${DIR}/config_${bldconfig}"
+	 	rm -rf $curlconfigdir ${DIR}/lib/${SPECIFIC_VERSION}/${bldconfig}/*
+
+		# Ares part
+		ares_configdir="${DIR}/../c-ares-1.18.1/${bldconfig}"
+		rm -rf $ares_configdir
+	done
+
+	exit 0
+fi
+
+# set up defaults 
+DEFAULT_CPPFLAGS="-D_LARGEFILE_SOURCE=1 -D_LARGEFILE64_SOURCE=1 -D_FILE_OFFSET_BITS=64 -I${THIRDPARTY_DIR}/openssl-1.1.1n/include/openssl -I${THIRDPARTY_DIR}/zlib-1.2.12 -I${THIRDPARTY_DIR}/c-ares-1.18.1 ${NOSSE2} ${USE64BIT} ${PTHREAD} ${SYMTAB_FLAG} ${TSFLAG}"
+DEFAULT_CFLAGS="${NOSSE2} ${USE64BIT} ${PTHREAD} ${SYMTAB_FLAG} ${TSFLAG}"
+DEFAULT_LDFLAGS="${USE64BIT} ${PTHREAD}"
+LIBS="${LPTHREAD}"
+
+for bldconfig in debug release
+do
+	# Create required dirs
+	mkdir -p ${DIR}/lib/${SPECIFIC_VERSION}/$bldconfig
+
+	# First make sure libcares.a is built
+	aresconfigdir="${DIR}/../c-ares-1.18.1/${bldconfig}"
+	mkdir -p $aresconfigdir
+	aresinstalldir="${DIR}/../c-ares-1.18.1/install_${bldconfig}"
+        mkdir -p $aresinstalldir
+	cd $aresconfigdir
+	
+	if [ ! -f ran_config ] ; then
+		 if [ -f Makefile ] ; then
+			  gmake distclean
+		 fi
+		 
+		 if [ "$bldconfig" = "debug" ] ; then
+			  CPPFLAGS="-DDEBUG ${DEFAULT_CPPFLAGS}"
+			  CFLAGS="${DEFAULT_CFLAGS}"
+			  EXTRA_CONFIGURE_FLAGS="--enable-debug"
+		 else
+			  CPPFLAGS="${DEFAULT_CPPFLAGS}"
+			  CFLAGS="${DEFAULT_CFLAGS}"
+			  EXTRA_CONFIGURE_FLAGS="--disable-debug"
+		 fi
+		 
+		 
+		 LDFLAGS="-L${THIRDPARTY_DIR}/openssl-1.1.1n/lib/${SPECIFIC_VERSION}/$bldconfig -L${THIRDPARTY_DIR}/zlib-1.2.12/${SPECIFIC_VERSION}/lib/$bldconfig ${DEFAULT_LDFLAGS}"
+		 export CPPFLAGS CFLAGS LDFLAGS LIBS
+		 
+		 ../configure --enable-shared=no --enable-debug=no --prefix=$aresinstalldir $EXTRA_CONFIGURE_FLAGS --enable-tests=no
+		if [ 0 -ne $? ] ; then
+			cd $DIR
+			gmake distclean
+			cd $aresconfigdir
+			../configure --enable-shared=no --enable-debug=no --prefix=`pwd` $EXTRA_CONFIGURE_FLAGS
+
+			if [ 0 -ne $? ] ; then
+				echo "Error configuring ares for configuration $bldconfig"
+				cd $DIR
+				exit 1
+			fi
+		fi
+		 
+		 touch ran_config
+	fi
+
+	if gmake; then
+		 if gmake install; then
+			  echo "installed c-ares for configuration $bldconfig"
+		 else	
+			  echo "Error installing c-ares for configuration $bldconfig"
+ 			  exit 1
+		 fi
+	else
+		 echo "Error building c-ares for configuration $bldconfig"
+		 exit 1
+	fi	
+	
+	# Then build libcurl.a
+	curlconfigdir="${DIR}/config_${bldconfig}"
+	mkdir -p $curlconfigdir
+	cd $curlconfigdir
+	if [ ! -f ran_config ] ; then
+		if [ -f Makefile ] ; then
+			gmake distclean
+		fi
+
+		if [ "$bldconfig" = "debug" ] ; then
+			CPPFLAGS="-DDEBUG ${DEFAULT_CPPFLAGS}"
+			CFLAGS="-DDEBUG ${DEFAULT_CFLAGS}"
+			EXTRA_CONFIGURE_FLAGS="--enable-debug"
+		else
+			CPPFLAGS="-DNDEBUG ${DEFAULT_CPPFLAGS}"
+			CFLAGS="-DNDEBUG ${DEFAULT_CFLAGS}"
+			EXTRA_CONFIGURE_FLAGS="--disable-debug"
+		fi
+
+		LDFLAGS="-L${THIRDPARTY_DIR}/openssl-1.1.1n/lib/${SPECIFIC_VERSION}/$bldconfig -L${THIRDPARTY_DIR}/zlib-1.2.12/${SPECIFIC_VERSION}/lib/$bldconfig ${DEFAULT_LDFLAGS}"
+		LIBS="-ldl -lrt ${LPTHREAD}"
+
+		export CPPFLAGS CFLAGS LDFLAGS LIBS
+
+		../configure --enable-ares=$aresinstalldir --enable-shared=no --enable-static=yes --enable-debug=no --disable-ldap --without-libidn --enable-thread --enable-noblocking --with-ssl=${THIRDPARTY_DIR}/openssl-1.1.1n $EXTRA_CONFIGURE_FLAGS
+
+		if [ 0 -ne $? ] ; then
+			cd $DIR
+			gmake distclean
+			cd $curlconfigdir
+			../configure --enable-ares=$aresconfigdir --enable-shared=no --enable-static=yes --enable-debug=no --disable-ldap --without-libidn --enable-thread --enable-noblocking --with-ssl=${THIRDPARTY_DIR}/openssl-1.1.1n $EXTRA_CONFIGURE_FLAGS
+
+			if [ 0 -ne $? ] ; then
+				echo "Error configuring curl for configuration $bldconfig"
+				cd $DIR
+				exit 1
+			fi
+		fi
+
+		touch ran_config
+	fi
+
+	if gmake ; then
+		echo "Build curl for configuration $bldconfig"
+        else
+		echo "Error building curl for configuration $bldconfig"
+		cd $DIR
+		exit 1
+	fi
+
+	cp ${curlconfigdir}/lib/.libs/libcurl.a ${DIR}/lib/${SPECIFIC_VERSION}/$bldconfig
+done
+
+for bldconfig in debug release
+do
+	echo
+	echo "$bldconfig libcurl.a is built with following features (AsynchDNS indicates c-ares support):"
+	sh $DIR/config_$bldconfig/curl-config --features
+	echo
+done

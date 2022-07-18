@@ -1,0 +1,184 @@
+#! /bin/sh
+
+usage()
+{
+	 echo " "
+	 echo "inmage_config_build -d <boost dir> [-r | -b] [--clean] [--help | -h]"
+	 echo " "
+	 echo "Configures and builds the boost third party package."
+	 echo " "
+	 echo " -d (required): boost dir to be build."
+	 echo " -r (optional): build release only (default debug)."
+	 echo " -b (optional): build both debug and release (default debug only)."
+	 echo " --clean      : cleans (deletes) all build and configuration outputs."
+	 echo "                You will need to rerun inmage_config_build to regenreate all the data"
+	 echo "                This maybe needed if their is a failure during the initial config build"
+ 	 echo " --help | -h  : display this message"
+	 echo " "
+	 exit 0
+}
+
+do_clean()
+{
+	 if [ -f ./b2 ] ; then
+		  ./b2 --clean
+	 fi
+	 rm -Rf ran_config bin.v2 stage	 
+}
+
+CLEAN=
+CONFIG_RELEASE=f
+CONFIG_DEBUG=t
+BOOST_BUILD_DIR=
+
+# parse command line for options
+while test "$1" != "" ; do
+	 case $1 in 
+		  -b)
+				CONFIG_REELEASE=t
+				CONFIG_DEBUG=t
+				;;
+		  -r) 
+				CONFIG_RELEASE=t
+				CONFIG_DEBUG=f
+				;;		  
+		  -d) 
+				BOOST_BUILD_DIR=$2
+				shift
+				;;		  
+		  --clean) 
+				CLEAN=t
+				;;
+		  --help| -h)
+				usage
+				exit
+				;;
+		  *)
+				echo "ERROR invalid args: $*"
+				usage
+				;;
+	 esac
+	 shift
+done
+
+if [ "" = "$BOOST_BUILD_DIR" ] ; then
+	 echo "ERROR -d option missing"
+	 usage
+	 exit 1
+fi
+
+# go to correct directory
+DIR=`dirname $0`
+FULL_PATH=`echo "${BOOST_BUILD_DIR}" | grep "^/"`
+
+if [ "" = "${FULL_PATH}" ] ; then
+	 DIR=$DIR/$BOOST_BUILD_DIR
+else
+	 DIR=$BOOST_BUILD_DIR
+fi
+
+cd "$DIR"
+
+# play it safe and make sure config is executable
+chmod 777 ./bootstrap.sh
+
+if [ "t" = "$CLEAN" ] ; then
+	 do_clean
+	 exit 0
+fi
+
+if [ "t" = "$CONFIG_RELEASE" ] ; then
+	 CONFIG=release
+fi
+
+if [ "t" = "$CONFIG_DEBUG" ] ; then
+	 if [ "" = "$CONFIG" ] ; then
+		  CONFIG=debug
+	 else
+		  CONFIG=${CONFIG},debug
+	 fi
+fi
+
+# set up default compiler options
+if [ "" = "$X_ARCH" ] ; then 
+	 SYSTEM=`uname`
+else
+	 SYSTEM="$X_ARCH"
+fi
+
+case $SYSTEM in
+	 SunOS)
+		  NOSSE2=
+		  BITS=`isainfo -b`
+		  if [ "64" = "${BITS}" ] ; then
+				USE64BIT=-m64
+				TOOLSET="using gcc : : : <compileflags>-m64 <linkflags>-m64 ;"
+		  else
+				USE64BIT=
+				TOOLSET="using gcc ;"
+		  fi
+		  SPARCV=`isainfo -k`
+		  DEBUG=
+		  PTHREAD=-pthreads
+		  LPTHREAD=-lpthread
+		  SYMTAB_FLAG=-gdwarf-2
+		  TSFLAG=
+		  ;;
+	 Linux)
+		  NOSSE2=-mno-sse2
+		  DEBUG=debug
+		  TOOLSET="using gcc ;"
+		  PTHREAD=-pthread
+		  LPTHREAD=-lpthread
+		  SYMTAB_FLAG=-g
+		  TSFLAG=
+		  ;;
+	AIX)
+		  NOSSE2=-mno-sse2
+		  USE64BIT=-maix64
+		  DEBUG=debug
+		  TOOLSET="using gcc : : : <compileflags>-maix64 <linkflags>-maix64 ;"
+		  OBJECT_MODE=64
+		  export OBJECT_MODE
+		  PTHREAD=-pthread
+		  LPTHREAD=-lpthread
+		  SYMTAB_FLAG=-gxcoff
+		  TSFLAG=-DTHREAD_SAFE
+		  ;;
+	 *)
+		  echo "ERROR running $0 (in $DIR/)"
+		  echo "  platform $SYSTEM not supported yet"
+		  echo "  see inmage-make-system-users-guide.txt for details on adding support"
+		  exit 1
+		  ;;
+esac		  
+
+# set up defaults
+CFLAGS="-D_LARGEFILE_SOURCE=1 -D_LARGEFILE64_SOURCE=1 -D_FILE_OFFSET_BITS=64 ${NOSSE2} ${USE64BIT} ${PTHREAD} ${SYMTAB_FLAG} ${TSFLAG}"
+export CFLAGS
+CPPFLAGS="-D_LARGEFILE_SOURCE=1 -D_LARGEFILE64_SOURCE=1 -D_FILE_OFFSET_BITS=64 ${NOSSE2} ${USE64BIT} ${PTHREAD} ${SYMTAB_FLAG} ${TSFLAG}"
+export CPPFLAGS
+LDFLAGS="${USE64BIT} ${PTHREAD} ${LPTHREAD}"
+export LDFLAGS
+
+# boost uses a different model then most thirdpary packages, 
+# the main diferences is that it uses bjam under the covers,
+# builds both release and debug int a single run of make and 
+# places both reelase and debug output libs into a stage directory
+
+# confgure
+if [ ! -f ran_config ] || [ ! -f ./b2 ] ; then 
+	 do_clean
+
+#   add additional libraries to build as needed. make sure to add the same libraries to the windows
+#   inmage_config_build.bat file. also make sure to add these libraries to the thirdpaty.mak BOOST_LIBS macro
+#   see boost docs for more details
+	 ./bootstrap.sh --with-libraries=system,thread,date_time,regex,serialization,filesystem,program_options,random,chrono --without-icu
+	 touch ran_config
+fi
+ 
+# build
+echo ${TOOLSET} > user-config.jam
+./b2 --user-config=user-config.jam --layout=tagged --prefix=install variant=${CONFIG} link=static threading=multi runtime-link=shared ${BUILD_OPT} stage
+
+exit 0

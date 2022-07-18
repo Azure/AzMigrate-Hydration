@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\config">
+      <UniqueIdentifier>{17def2e0-b53f-4f92-8350-45e018ab495c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\win32">
+      <UniqueIdentifier>{9e5d97eb-7d1b-4cfa-b09b-9a7355447057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\resthelper">
+      <UniqueIdentifier>{adcbc660-9264-4ed4-97e7-86e53ef42452}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\config">
+      <UniqueIdentifier>{822cdddd-bf7c-4e71-817a-f7a69035b435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\win32">
+      <UniqueIdentifier>{ebf9b5a5-62bb-4ffe-bf87-ade5e3220175}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\resthelper">
+      <UniqueIdentifier>{38dd1ceb-54f5-489c-97cf-6a10b7811ec5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\common">
+      <UniqueIdentifier>{c423eb5c-0c51-4bf2-9451-984aa8f96a35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common">
+      <UniqueIdentifier>{95d38bef-215c-4753-b679-1734b7e44486}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Config\HostInfoConfig.cpp">
+      <Filter>Source Files\config</Filter>
+    </ClCompile>
+    <ClCompile Include="Config\LibXmlUtil.cpp">
+      <Filter>Source Files\config</Filter>
+    </ClCompile>
+    <ClCompile Include="Config\RecoveryConfig.cpp">
+      <Filter>Source Files\config</Filter>
+    </ClCompile>
+    <ClCompile Include="RestHelper\CloudBlob.cpp">
+      <Filter>Source Files\resthelper</Filter>
+    </ClCompile>
+    <ClCompile Include="RestHelper\HttpClient.cpp">
+      <Filter>Source Files\resthelper</Filter>
+    </ClCompile>
+    <ClCompile Include="RestHelper\HttpRequest.cpp">
+      <Filter>Source Files\resthelper</Filter>
+    </ClCompile>
+    <ClCompile Include="RestHelper\HttpResponse.cpp">
+      <Filter>Source Files\resthelper</Filter>
+    </ClCompile>
+    <ClCompile Include="RestHelper\HttpUtil.cpp">
+      <Filter>Source Files\resthelper</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32\WmiEngine.cpp">
+      <Filter>Source Files\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32\RecoveryHelpers.cpp">
+      <Filter>Source Files\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32\WinUtils.cpp">
+      <Filter>Source Files\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="common\utils.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Trace.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="win32\WmiConnect.cpp">
+      <Filter>Source Files\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="win32\WmiRecordProcessors.cpp">
+      <Filter>Source Files\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="win32\RegistryUtil.cpp">
+      <Filter>Source Files\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Process.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="AzureRecovery.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="resthelper\ServiceBusQueue.cpp">
+      <Filter>Source Files\resthelper</Filter>
+    </ClCompile>
+    <ClCompile Include="resthelper\EventHub.cpp">
+      <Filter>Source Files\resthelper</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Config\HostInfoConfig.h">
+      <Filter>Header Files\config</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\HostInfoDefs.h">
+      <Filter>Header Files\config</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\LibXmlUtil.h">
+      <Filter>Header Files\config</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\RecoveryConfig.h">
+      <Filter>Header Files\config</Filter>
+    </ClInclude>
+    <ClInclude Include="RestHelper\CloudBlob.h">
+      <Filter>Header Files\resthelper</Filter>
+    </ClInclude>
+    <ClInclude Include="RestHelper\HttpClient.h">
+      <Filter>Header Files\resthelper</Filter>
+    </ClInclude>
+    <ClInclude Include="RestHelper\HttpRequest.h">
+      <Filter>Header Files\resthelper</Filter>
+    </ClInclude>
+    <ClInclude Include="RestHelper\HttpResponse.h">
+      <Filter>Header Files\resthelper</Filter>
+    </ClInclude>
+    <ClInclude Include="RestHelper\HttpRestDefs.h">
+      <Filter>Header Files\resthelper</Filter>
+    </ClInclude>
+    <ClInclude Include="RestHelper\HttpUtil.h">
+      <Filter>Header Files\resthelper</Filter>
+    </ClInclude>
+    <ClInclude Include="RestHelper\RestConstants.h">
+      <Filter>Header Files\resthelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\WmiEngine.h">
+      <Filter>Header Files\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\RecoveryHelpers.h">
+      <Filter>Header Files\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\WinUtils.h">
+      <Filter>Header Files\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="common\utils.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="win32\OSVersion.h">
+      <Filter>Header Files\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="win32\WinConstants.h">
+      <Filter>Header Files\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Trace.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="win32\WmiConnect.h">
+      <Filter>Header Files\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="win32\WmiRecordProcessors.h">
+      <Filter>Header Files\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="win32\RegistryUtil.h">
+      <Filter>Header Files\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Process.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\AzureRecoveryException.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="AzureRecovery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Status.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resthelper\ServiceBusQueue.h">
+      <Filter>Header Files\resthelper</Filter>
+    </ClInclude>
+    <ClInclude Include="resthelper\EventHub.h">
+      <Filter>Header Files\resthelper</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3844EC72-39A9-427F-8759-15B735791AAE}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>AzureRecoveryLib</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <SpectreMitigation>Spectre</SpectreMitigation>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <SpectreMitigation>Spectre</SpectreMitigation>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <SpectreMitigation>Spectre</SpectreMitigation>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\win-rules.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\win-rules-files\x64\win-rules.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\win-rules.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\win-rules-files\x64\win-rules.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_WIN32_WINNT=0x0502;ACE_AS_STATIC_LIBS;CURL_STATICLIB;WIN32_LEAN_AND_MEAN;ATL_NO_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(ACE_INCLUDES);$(BOOST_INCLUDES);$(CURL_INCLUDES);$(OPENSSL_INCLUDES);$(LIBXML2_INCLUDES);..\securitylib;..\securitylib\win;..\common;..\inmsafecapis;..\inmsafecapis\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_WIN32_WINNT=0x0502;ACE_AS_STATIC_LIBS;CURL_STATICLIB;WIN32_LEAN_AND_MEAN;ATL_NO_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(ACE_INCLUDES);$(BOOST_INCLUDES);$(CURL_INCLUDES);$(OPENSSL_INCLUDES);$(LIBXML2_INCLUDES);..\securitylib;..\securitylib\win;..\common;..\inmsafecapis;..\inmsafecapis\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OmitFramePointers>false</OmitFramePointers>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_WIN32_WINNT=0x0502;ACE_AS_STATIC_LIBS;CURL_STATICLIB;WIN32_LEAN_AND_MEAN;ATL_NO_LEAN_AND_MEAN;LIBXML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(ACE_INCLUDES);$(BOOST_INCLUDES);$(CURL_INCLUDES);$(OPENSSL_INCLUDES);$(LIBXML2_INCLUDES);..\securitylib;..\securitylib\win;..\common;..\inmsafecapis;..\inmsafecapis\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_WIN32_WINNT=0x0502;ACE_AS_STATIC_LIBS;CURL_STATICLIB;WIN32_LEAN_AND_MEAN;ATL_NO_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(ACE_INCLUDES);$(BOOST_INCLUDES);$(CURL_INCLUDES);$(OPENSSL_INCLUDES);$(LIBXML2_INCLUDES);..\securitylib;..\securitylib\win;..\common;..\inmsafecapis;..\inmsafecapis\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalOptions>/DYNAMICBASE /guard:cf %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AzureRecovery.cpp" />
+    <ClCompile Include="common\Process.cpp" />
+    <ClCompile Include="common\Trace.cpp" />
+    <ClCompile Include="common\utils.cpp" />
+    <ClCompile Include="Config\HostInfoConfig.cpp" />
+    <ClCompile Include="Config\LibXmlUtil.cpp" />
+    <ClCompile Include="Config\RecoveryConfig.cpp" />
+    <ClCompile Include="RestHelper\CloudBlob.cpp" />
+    <ClCompile Include="resthelper\EventHub.cpp" />
+    <ClCompile Include="RestHelper\HttpClient.cpp" />
+    <ClCompile Include="RestHelper\HttpRequest.cpp" />
+    <ClCompile Include="RestHelper\HttpResponse.cpp" />
+    <ClCompile Include="RestHelper\HttpUtil.cpp" />
+    <ClCompile Include="resthelper\ServiceBusQueue.cpp" />
+    <ClCompile Include="Win32\RecoveryHelpers.cpp" />
+    <ClCompile Include="win32\RegistryUtil.cpp" />
+    <ClCompile Include="Win32\WinUtils.cpp" />
+    <ClCompile Include="win32\WmiConnect.cpp" />
+    <ClCompile Include="Win32\WmiEngine.cpp" />
+    <ClCompile Include="win32\WmiRecordProcessors.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AzureRecovery.h" />
+    <ClInclude Include="common\AzureRecoveryException.h" />
+    <ClInclude Include="common\Process.h" />
+    <ClInclude Include="common\Trace.h" />
+    <ClInclude Include="common\utils.h" />
+    <ClInclude Include="Config\HostInfoConfig.h" />
+    <ClInclude Include="Config\HostInfoDefs.h" />
+    <ClInclude Include="Config\LibXmlUtil.h" />
+    <ClInclude Include="Config\RecoveryConfig.h" />
+    <ClInclude Include="RestHelper\CloudBlob.h" />
+    <ClInclude Include="resthelper\EventHub.h" />
+    <ClInclude Include="RestHelper\HttpClient.h" />
+    <ClInclude Include="RestHelper\HttpRequest.h" />
+    <ClInclude Include="RestHelper\HttpResponse.h" />
+    <ClInclude Include="RestHelper\HttpRestDefs.h" />
+    <ClInclude Include="RestHelper\HttpUtil.h" />
+    <ClInclude Include="RestHelper\RestConstants.h" />
+    <ClInclude Include="resthelper\ServiceBusQueue.h" />
+    <ClInclude Include="Status.h" />
+    <ClInclude Include="win32\OSVersion.h" />
+    <ClInclude Include="Win32\RecoveryHelpers.h" />
+    <ClInclude Include="win32\RegistryUtil.h" />
+    <ClInclude Include="win32\WinConstants.h" />
+    <ClInclude Include="Win32\WinUtils.h" />
+    <ClInclude Include="win32\WmiConnect.h" />
+    <ClInclude Include="Win32\WmiEngine.h" />
+    <ClInclude Include="win32\WmiRecordProcessors.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

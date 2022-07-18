@@ -1,0 +1,20 @@
+{
+    "ResourceGroupName" : "shamish-rg-ccy",
+    "Location" : "centraluseuap",
+    "SubscriptionId" : "6d875e77-e412-4d7d-9af4-8895278b4443",
+    "OSType" : "Linux",
+    "OSDiskName" : "shan-ubuntu18-04-bios-OSdisk-00-test",
+    "AttachDataDisks" : false,
+    "NoOfDataDisks" : 0,
+    "DataDisksName" : [
+       "abc",
+       "xyz"
+    ],
+    "GithubBranch" : "shan-ubuntu18-test",
+    "AddCustomConfigSettings" : false,
+    "EnableDHCP" : true,
+    "EnableGA" : true,
+    "TargetVM_NICName" : "nic-shan-ubuntu18-04-bios-00-test",
+    "TargetVM_VirtualMachineName" : "shan-ubuntu-github-test",
+    "TargetVM_VirtualMachineSize" : "Standard_B1ms"
+}

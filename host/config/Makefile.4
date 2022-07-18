@@ -1,0 +1,39 @@
+#
+# Because we assume our generator rules are platform specific, we cannot
+# specify a platform independent generator rule, as we have here. Also, this
+# rule has no suffix pattern to apply. Will need to improve our Makefiles.
+# 
+# note: use the FROM_HEADER.cpp here so that it does a compile and link typically LINK.cpp 
+# does not have the link only option set
+$(X_ARCH)/config/fromheader: config/fromheader.cpp
+	$(VERBOSE)$(FROM_HEADER.cpp) $(config_CFLAGS) -o '$@' '$<' 
+	$(RULE_SEPARATOR)
+
+
+# empty rules for serialized headers needed to keep dependency checking happy
+# when the serialize headers don't exist (e.g. inital make or after make clean)
+$(patsubst %.cpp,%.h,$(filter serialize%.cpp,$(SRCS))): %.h:$(X_ARCH)/config/%.h
+
+# Serialize (headers)
+$(patsubst %.cpp,$(X_ARCH)/config/%.h,$(filter serialize%.cpp,$(SRCS))): $(X_ARCH)/config/serialize%.h: config/%.h $(X_ARCH)/config/fromheader
+	$(VERBOSE)$(X_ARCH)/config/fromheader --includes "`$(DEPENDENCIES.cpp) $(config_CFLAGS) $<`" header $< --normal serialize > $@
+	$(RULE_SEPARATOR)
+
+# Serialize (source)
+$(patsubst %.cpp,$(X_ARCH)/config/%.cpp,$(filter serialize%.cpp,$(SRCS))): $(X_ARCH)/config/serialize%.cpp: config/%.h $(X_ARCH)/config/fromheader
+	$(VERBOSE)$(X_ARCH)/config/fromheader --includes "`$(DEPENDENCIES.cpp) $(config_CFLAGS) $<`" src $< --normal serialize > $@
+	$(RULE_SEPARATOR)
+
+$(patsubst %.cpp,%.h,$(filter xmlize%.cpp,$(SRCS))): %.h:$(X_ARCH)/config/%.h
+# Xmlize (headers)
+$(patsubst %.cpp,$(X_ARCH)/config/%.h,$(filter xmlize%.cpp,$(SRCS))): $(X_ARCH)/config/xmlize%.h: config/%.h $(X_ARCH)/config/fromheader
+	$(VERBOSE)$(X_ARCH)/config/fromheader --includes "`$(DEPENDENCIES.cpp) $(config_CFLAGS) $<`" header $< --normal xmlize > $@
+	$(RULE_SEPARATOR)
+
+# Xmlize (source)
+$(patsubst %.cpp,$(X_ARCH)/config/%.cpp,$(filter xmlize%.cpp,$(SRCS))): $(X_ARCH)/config/xmlize%.cpp: config/%.h $(X_ARCH)/config/fromheader
+	$(VERBOSE)$(X_ARCH)/config/fromheader --includes "`$(DEPENDENCIES.cpp) $(config_CFLAGS) $<`" src $< --normal xmlize > $@
+	$(RULE_SEPARATOR)
+
+BINARY=$(X_LIBPRE)config
+BINARY_EXT=$(X_LIBEXT)

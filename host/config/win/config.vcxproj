@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Test|Win32">
+      <Configuration>Test</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Test|x64">
+      <Configuration>Test</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{48330794-E280-45A0-9F16-69010EF753BB}</ProjectGuid>
+    <RootNamespace>config</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Test|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="..\win-rules.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="..\win-rules.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="..\win-rules.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Test|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="..\win-rules.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="..\win-rules-files\x64\win-rules.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="..\win-rules-files\x64\win-rules.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.21005.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>Debug\</OutDir>
+    <IntDir>Debug\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>Release\</OutDir>
+    <IntDir>Release\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">
+    <OutDir>Test\</OutDir>
+    <IntDir>Test\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|x64'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PreBuildEvent>
+      <Command>makeser.bat $(IntDir)</Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>..\appframeworklib;..\common;..\inmsafeint;..\inmsafeint\win;..\inmsafecapis;..\inmsafecapis\win;..\common\win32;..\s2libs\thread;..\s2libs\common;win;.;$(ACE_INCLUDES);..\config;.\win;$(BOOST_INCLUDES);..\cdplibs;..\cdplibs\v1;..\cdplibs\v2;$(CURL_INCLUDES);..\log;..\config\win;..\npwwn;..\InmXmlParser;..\appframeworklib\config;$(INM_MD5_INCLUDES);$(SIGSLOT_INCLUDES);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;SV_WINDOWS=1;WIN32_LEAN_AND_MEAN;_WIN32_WINNT=0x0502;ACE_AS_STATIC_LIBS;_LARGEFILE_SOURCE=1;_LARGEFILE64_SOURCE=1;_FILE_OFFSET_BITS=64;CURL_STATICLIB;SV_USES_LONGPATHS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <ProgramDataBaseFileName>$(IntDir)config.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)config.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PreBuildEvent>
+      <Command>makeser.bat $(IntDir)</Command>
+    </PreBuildEvent>
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>..\appframeworklib;..\common;..\inmsafeint;..\inmsafeint\win;..\inmsafecapis;..\inmsafecapis\win;..\common\win32;..\s2libs\thread;..\s2libs\common;win;.;$(ACE_INCLUDES);..\config;.\win;$(BOOST_INCLUDES);..\cdplibs;..\cdplibs\v1;..\cdplibs\v2;$(CURL_INCLUDES);..\log;..\config\win;..\npwwn;..\InmXmlParser;..\appframeworklib\config;$(INM_MD5_INCLUDES);$(SIGSLOT_INCLUDES);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;SV_WINDOWS=1;WIN32_LEAN_AND_MEAN;_WIN32_WINNT=0x0502;ACE_AS_STATIC_LIBS;_LARGEFILE_SOURCE=1;_LARGEFILE64_SOURCE=1;_FILE_OFFSET_BITS=64;CURL_STATICLIB;SV_USES_LONGPATHS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <ProgramDataBaseFileName>$(IntDir)config.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)config.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PreBuildEvent>
+      <Command>makeser.bat $(IntDir)</Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>..\appframeworklib;..\common;..\inmsafeint;..\inmsafeint\win;..\inmsafecapis;..\inmsafecapis\win;..\common\win32;..\s2libs\thread;..\s2libs\common;win;.;$(ACE_INCLUDES);..\config;.\win;$(BOOST_INCLUDES);..\cdplibs;..\cdplibs\v1;..\cdplibs\v2;$(CURL_INCLUDES);..\log;..\config\win;..\npwwn;..\InmXmlParser;..\appframeworklib\config;$(INM_MD5_INCLUDES);$(SIGSLOT_INCLUDES);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;SV_WINDOWS=1;WIN32_LEAN_AND_MEAN;_WIN32_WINNT=0x0502;ACE_AS_STATIC_LIBS;_LARGEFILE_SOURCE=1;_LARGEFILE64_SOURCE=1;_FILE_OFFSET_BITS=64;CURL_STATICLIB;SV_USES_LONGPATHS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)config.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PreBuildEvent>
+      <Command>makeser.bat $(IntDir)</Command>
+    </PreBuildEvent>
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>..\appframeworklib;..\common;..\inmsafeint;..\inmsafeint\win;..\inmsafecapis;..\inmsafecapis\win;..\common\win32;..\s2libs\thread;..\s2libs\common;win;.;$(ACE_INCLUDES);..\config;.\win;$(BOOST_INCLUDES);..\cdplibs;..\cdplibs\v1;..\cdplibs\v2;$(CURL_INCLUDES);..\log;..\config\win;..\npwwn;..\InmXmlParser;..\appframeworklib\config;$(INM_MD5_INCLUDES);$(SIGSLOT_INCLUDES);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;SV_WINDOWS=1;WIN32_LEAN_AND_MEAN;_WIN32_WINNT=0x0502;ACE_AS_STATIC_LIBS;_LARGEFILE_SOURCE=1;_LARGEFILE64_SOURCE=1;_FILE_OFFSET_BITS=64;CURL_STATICLIB;SV_USES_LONGPATHS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)config.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\common;..\inmsafeint;..\inmsafeint\win;..\inmsafecapis;..\inmsafecapis\win;..\common\win32;.;..\s2libs\thread;..\s2libs\common;win;$(ACE_INCLUDES);$(BOOST_INCLUDES);..\cdplibs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;SV_WINDOWS=1;WIN32_LEAN_AND_MEAN;_WIN32_WINNT=0x0502;ACE_AS_STATIC_LIBS;CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>../common/Debug/hostagenthelpers.lib;wininet.lib;ws2_32.lib;version.lib;libcurl.lib;dbghelp.lib;libcrypto.lib;libssl.lib;winmm.lib;ACEsd.lib;..\s2libs\Debug\s2libs.lib;..\tal\Debug\tal.lib;..\cdplibs\Debug\cdplibs.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)testconfig.exe</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)configtest.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalLibraryDirectories>$(ACE_LIB_DIR);$(CURL_LIB_DIR_DEBUG);$(OPENSSL_LIB_DIR_DEBUG)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Test|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\common;..\inmsafeint;..\inmsafeint\win;..\inmsafecapis;..\inmsafecapis\win;..\common\win32;.;..\s2libs\thread;..\s2libs\common;win;$(ACE_INCLUDES);.$(BOOST_INCLUDES);..\cdplibs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;SV_WINDOWS=1;WIN32_LEAN_AND_MEAN;_WIN32_WINNT=0x0502;ACE_AS_STATIC_LIBS;CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>../common/Debug/hostagenthelpers.lib;wininet.lib;ws2_32.lib;version.lib;libcurl.lib;dbghelp.lib;libcrypto.lib;libssl.lib;winmm.lib;ACEsd.lib;..\s2libs\Debug\s2libs.lib;..\tal\Debug\tal.lib;..\cdplibs\Debug\cdplibs.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)testconfig.exe</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)configtest.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalLibraryDirectories>$(ACE_LIB_DIR);$(CURL_LIB_DIR_DEBUG);$(OPENSSL_LIB_DIR_DEBUG)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="apiwrapper.cpp" />
+    <ClCompile Include="cdpdef.cpp" />
+    <ClCompile Include="cdpsnapshotrequest.cpp" />
+    <ClCompile Include="configuratorrpc.cpp" />
+    <ClCompile Include="configurators.cpp" />
+    <ClCompile Include="configurevxagentproxy.cpp" />
+    <ClCompile Include="configwrapper.cpp" />
+    <ClCompile Include="cxproxy.cpp" />
+    <ClCompile Include="datacacher.cpp" />
+    <ClCompile Include="fileconfigurator.cpp" />
+    <ClCompile Include="win\fileconfiguratorex.cpp" />
+    <ClCompile Include="initialsettings.cpp" />
+    <ClCompile Include="marshal.cpp" />
+    <ClCompile Include="prismsettings.cpp" />
+    <ClCompile Include="pushInstallationSettings.cpp" />
+    <ClCompile Include="replicationpairsettings.cpp" />
+    <ClCompile Include="retentioninformation.cpp" />
+    <ClCompile Include="retentionsettings.cpp" />
+    <ClCompile Include="rpcconfigurator.cpp" />
+    <ClCompile Include="serializeapplicationsettings.cpp" />
+    <ClCompile Include="serializeatconfigmanagersettings.cpp" />
+    <ClCompile Include="serializecdpsnapshotrequest.cpp" />
+    <ClCompile Include="serializeinitialsettings.cpp" />
+    <ClCompile Include="serializeprismsettings.cpp" />
+    <ClCompile Include="serializepushInstallationSettings.cpp" />
+    <ClCompile Include="serializeReplicationPairSettings.cpp" />
+    <ClCompile Include="serializeretentioninformation.cpp" />
+    <ClCompile Include="serializeretentionsettings.cpp" />
+    <ClCompile Include="serializesourcesystemconfigsettings.cpp" />
+    <ClCompile Include="serializeswitchinitialsettings.cpp" />
+    <ClCompile Include="serializetask.cpp" />
+    <ClCompile Include="serializetransport_settings.cpp" />
+    <ClCompile Include="serializevolumegroupsettings.cpp" />
+    <ClCompile Include="serializevolumerecoveryhelperssettings.cpp" />
+    <ClCompile Include="snapshotmanagerproxy.cpp" />
+    <ClCompile Include="sourcesystemconfigsettings.cpp" />
+    <ClCompile Include="svconfig.cpp" />
+    <ClCompile Include="win\svsemaphore.cpp" />
+    <ClCompile Include="switchinitialsettings.cpp" />
+    <ClCompile Include="talwrapper.cpp" />
+    <ClCompile Include="unmarshal.cpp" />
+    <ClCompile Include="volumegroupsettings.cpp" />
+    <ClCompile Include="xmlizeapplicationsettings.cpp" />
+    <ClCompile Include="xmlizeatconfigmanagersettings.cpp" />
+    <ClCompile Include="xmlizecdpsnapshotrequest.cpp" />
+    <ClCompile Include="xmlizecompressmode.cpp" />
+    <ClCompile Include="xmlizeinitialsettings.cpp" />
+    <ClCompile Include="xmlizeprismsettings.cpp" />
+    <ClCompile Include="xmlizepushInstallationSettings.cpp" />
+    <ClCompile Include="xmlizereplicationpairsettings.cpp" />
+    <ClCompile Include="xmlizeretentioninformation.cpp" />
+    <ClCompile Include="xmlizeretentionsettings.cpp" />
+    <ClCompile Include="xmlizesourcesystemconfigsettings.cpp" />
+    <ClCompile Include="xmlizetask.cpp" />
+    <ClCompile Include="xmlizetransport_settings.cpp" />
+    <ClCompile Include="xmlizevolumegroupsettings.cpp" />
+    <ClCompile Include="xmlizevolumerecoveryhelperssettings.cpp" />
+    <ClCompile Include="xmlmarshal.cpp" />
+    <ClCompile Include="xmlunmarshal.cpp" />
+    <ClCompile Include="xmlwrapper.cpp" />
+    <ClCompile Include="drtconfig.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="drtconfigurator.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\common\unittest.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="apinames.h" />
+    <ClInclude Include="apiwrapper.h" />
+    <ClInclude Include="applicationsettings.h" />
+    <ClInclude Include="atconfigmanagersettings.h" />
+    <ClInclude Include="cdpsnapshotrequest.h" />
+    <ClInclude Include="configurator2.h" />
+    <ClInclude Include="configuratorrpc.h" />
+    <ClInclude Include="configurators.h" />
+    <ClInclude Include="configuratorxml.h" />
+    <ClInclude Include="configurereplicationpair.h" />
+    <ClInclude Include="configurereplicationpairmanager.h" />
+    <ClInclude Include="configureretentionmanager.h" />
+    <ClInclude Include="configureservice.h" />
+    <ClInclude Include="configureservicemanager.h" />
+    <ClInclude Include="configuresnapshot.h" />
+    <ClInclude Include="configurevolume.h" />
+    <ClInclude Include="configurevolumegroups.h" />
+    <ClInclude Include="configurevolumemanager.h" />
+    <ClInclude Include="configurevolumemanagerproxy.h" />
+    <ClInclude Include="configurevxagent.h" />
+    <ClInclude Include="configurevxagentproxy.h" />
+    <ClInclude Include="configurevxtransport.h" />
+    <ClInclude Include="configutils.h" />
+    <ClInclude Include="configwrapper.h" />
+    <ClInclude Include="cxarg.h" />
+    <ClInclude Include="cxproxy.h" />
+    <ClInclude Include="datacacher.h" />
+    <ClInclude Include="fileconfigurator.h" />
+    <ClInclude Include="win\fileconfiguratordefs.h" />
+    <ClInclude Include="initialsettings.h" />
+    <ClInclude Include="win\localconfigurator.h" />
+    <ClInclude Include="marshal.h" />
+    <ClInclude Include="prismsettings.h" />
+    <ClInclude Include="pushInstallationSettings.h" />
+    <ClInclude Include="replicationpairsettings.h" />
+    <ClInclude Include="retentioninformation.h" />
+    <ClInclude Include="rpcconfigurator.h" />
+    <ClInclude Include="serializationtype.h" />
+    <ClInclude Include="serializeapplicationsettings.h" />
+    <ClInclude Include="serializeatconfigmanagersettings.h" />
+    <ClInclude Include="serializeprismsettings.h" />
+    <ClInclude Include="serializepushInstallationSettings.h" />
+    <ClInclude Include="serializer.h" />
+    <ClInclude Include="serializesourcesystemconfigsettings.h" />
+    <ClInclude Include="serializeswitchinitialsettings.h" />
+    <ClInclude Include="serializetask.h" />
+    <ClInclude Include="serializevolumerecoveryhelperssettings.h" />
+    <ClInclude Include="sourcesystemconfigsettings.h" />
+    <ClInclude Include="svconfig.h" />
+    <ClInclude Include="svsemaphore.h" />
+    <ClInclude Include="switchinitialsettings.h" />
+    <ClInclude Include="talwrapper.h" />
+    <ClInclude Include="task.h" />
+    <ClInclude Include="transport_settings.h" />
+    <ClInclude Include="unmarshal.h" />
+    <ClInclude Include="vacp_tag_info.h" />
+    <ClInclude Include="volumegroupsettings.h" />
+    <ClInclude Include="volumerecoveryhelperssettings.h" />
+    <ClInclude Include="xmlizeapplicationsettings.h" />
+    <ClInclude Include="xmlizeatconfigmanagersettings.h" />
+    <ClInclude Include="xmlizecdpsnapshotrequest.h" />
+    <ClInclude Include="xmlizecompressmode.h" />
+    <ClInclude Include="xmlizeinitialsettings.h" />
+    <ClInclude Include="xmlizeprismsettings.h" />
+    <ClInclude Include="xmlizepushInstallationSettings.h" />
+    <ClInclude Include="xmlizereplicationpairsettings.h" />
+    <ClInclude Include="xmlizeretentioninformation.h" />
+    <ClInclude Include="xmlizeretentionsettings.h" />
+    <ClInclude Include="xmlizesourcesystemconfigsettings.h" />
+    <ClInclude Include="xmlizetask.h" />
+    <ClInclude Include="xmlizetransport_settings.h" />
+    <ClInclude Include="xmlizevolumegroupsettings.h" />
+    <ClInclude Include="xmlizevolumerecoveryhelperssettings.h" />
+    <ClInclude Include="xmlmarshal.h" />
+    <ClInclude Include="xmlunmarshal.h" />
+    <ClInclude Include="xmlwrapper.h" />
+    <ClInclude Include="..\common\unittest.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="index.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="makeserialize.vcxproj">
+      <Project>{35cd2212-4760-4075-883a-b680b0567cfa}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

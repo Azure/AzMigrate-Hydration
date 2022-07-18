@@ -1,0 +1,77 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+- master
+- release
+- develop
+
+variables:
+  REPOROOT: $(Build.SourcesDirectory)
+  OUTPUTROOT: $(REPOROOT)\out
+  CDP_BUILD_TAG: azurerecoverytools
+
+stages:
+- stage: build
+  jobs:
+
+  # Windows build job
+  - job: windows_build
+    pool:
+      demands:
+      - msbuild
+      - visualstudio
+      vmImage: windows-latest
+      type: windows-latest
+
+    variables:
+      WindowsContainerImage: 'cdpxwin1809.azurecr.io/global/vse2019:latest'
+      ob_outputDirectory: '$(Build.SourcesDirectory)\Out'
+      ob_symbolsPublishing_enabled: true
+      ob_symbolsPublishing_symbolsFolder: '$(REPOROOT)\Symbols'
+
+    steps:
+      # Restore host NuGet packages.
+      - task: NuGetCommand@2
+        displayName: 'Restore Host NuGet Packages'
+        inputs:
+          command: 'restore'
+          restoreSolution: '$(REPOROOT)\host\host.sln'
+          feedsToUse: 'config'
+          nugetConfigPath: '$(REPOROOT)\.config\NuGet.config'
+
+      # Build AzureRecoveryUtil.exe.
+      - task: MSBuild@1
+        displayName: 'Build AzureRecoveryUtil.exe'
+        inputs: 
+          solution: '$(REPOROOT)\host\host.sln'
+          msbuildLocationMethod: 'location'
+          msbuildLocation: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe'
+          platform: 'win32'
+          configuration: 'release'
+          msbuildArguments: '-t:AzureRecoveryUtil /v:n /nr:false /flp1:Verbosity=n;LogFile=$(OUTPUTROOT)\logs\AzureRecoveryUtil.log;Encoding=UTF-8 /flp2:logfile=$(OUTPUTROOT)\logs\AzureRecoveryUtil.err;errorsonly /p:Configuration="LIB release - LIB OpenSSL"'
+          clean: false
+          maximumCpuCount: true
+          logProjectEvents: true
+
+      # Copy build artifacts.
+      - task: PowerShell@2
+        displayName: 'Copy Build Artifacts'
+        inputs:
+          targetType: 'inline'
+          script: |
+            Copy-Item -Path $(REPOROOT)\host\AzureRecoveryUtil\Release\AzureRecoveryUtil.exe $(OUTPUTROOT)\
+            Copy-Item -Path $(REPOROOT)\host\AzureRecoveryUtil\Release\AzureRecoveryUtil.pdb $(OUTPUTROOT)\
+          workingDirectory: '$(REPOROOT)'
+
+      # Capture symbol files.
+      - task: PowerShell@2
+        displayName: 'Capture Symbol Files'
+        inputs:
+          targetType: 'inline'
+          script: |
+            New-Item -Path $(REPOROOT) -Name "Symbols" -ItemType "Directory" -Force
+            Copy-Item -Path $(REPOROOT)\host\AzureRecoveryUtil\Release\AzureRecoveryUtil.pdb $(REPOROOT)\Symbols

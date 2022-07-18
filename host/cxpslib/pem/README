@@ -1,0 +1,93 @@
+How to create the various pem files used by the cxps. This is the
+process that was used to create the current pem files. These steps may
+change in newer versions of openssl. Check the current openssl docs if
+these steps do not work.
+
+The main thing is if creating new pem files, make the expiration date
+to be more then the default of 1 year. The current ones are good for
+20 years (will expire around 2030).
+
+NOTE:
+  + probably should be creating these for each customer and not using
+    the same ones
+
+  + the current pem files should not expire until some time in 2030 so
+    you should not need to do this
+
+  + assumes this is being done on windows
+
+  + when creating keys, you should be prompted for the following (the
+    values shown here are the ones that were used for the current pem
+    files) 
+
+      passphrase: inmage
+      Country: US
+      State: CA
+      City: Santa Clara
+      Org: InMage Systems
+      Org Unit: Scout WEB server
+      Comman Name: InMage
+
+  + assumes perl is in your path
+
+* install openssl (if not aleady installed)
+
+* cd to the openssl install dir
+
+* update bin\ca.pl to extend the exipration date by doing the
+  following. 
+
+  + serach for $DAYS= update to look like:
+ 
+    $DAYS="-days 7300";  # 20 year
+ 
+  + search for $CADAYS= update to look like:
+   
+    $CADAYS="-days 7300";  # 20 years
+
+  + search for -sign|-signreq  and update to look like ($DAYS was
+    added to override the default expiration date):
+
+      } elsif (/^(-sign|-signreq)$/) {
+          system ("$CA $DAYS -policy policy_anything -out newcert.pem " .
+                  "-infiles newreq.pem");
+
+* create a subdir for the CA (Certificate Authority)
+
+  mkdir ca
+
+* cd to that dir and do the following
+
+  + create CA (only needed if not already done)
+
+    perl ..\bin\ca.pl -newca
+
+  + generate a certificate request
+
+    perl ..\bin\ca.pl -newreq
+
+  + sign the certificate request
+
+    perl ..\bin\ca.pl -sign
+
+  + copy newcert.pem to host/cxpslib/pem/servercert.pem
+
+  + copy newkey.pem to host/cxpslib/pem/serverkey.pem
+
+  + copy demoCA/cacert.pem to host/cxpslib/pem/client.pem
+
+  + check in those new pem files
+
+* create diffie-hellman key
+
+  NOTE: there should be no reason to recreate this but documented for
+  completeness 
+ 
+  openssl gendh 1024 > dh.pem
+  
+* copy dh.pem to host/cxpslib/pem/dh.pem
+
+* check in dh.pem file
+
+
+

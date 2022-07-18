@@ -1,0 +1,451 @@
+/*!
+
+\file: doxygenmainpage.cpp
+
+\brief this just holds the customization for the main page no actual code
+
+\example cxpsclient.cpp
+
+\mainpage CX Process Server and Client
+
+This documents the new CX Process Server (from here after referred to as cxps) and new Client that talks to the cxps.
+
+<hr>
+\section intro_sec Introduction
+cxps is the new data transport server that will replace FTP.
+
+It will initially be a feature for feature replacement of proftpd. Once that is working, it will slowly add new features not available when using proftpd.
+
+cxps proejct will use doxygen to document the project. This will be a live document as cxps will evolve over time. Efforts will be made to keep these sections updated as well as documenting the code. But by using doxygen, even if some parts are not fully documented, you can always run doxygen to get the most recent class hierarchies, collaboration diagrams, call graphs and caller graphs.
+
+<hr>
+\section req_sec Requirements
+Currently all data transfer is done using ftp. Proftpd is the ftp server used. While it has performed admirably up to this point, some of its limitations are starting to be noticed. 
+
+- Does not work well on windows. Hangs after long usage
+- Times out on slow connections with larger file list. Requires manual intervention to fix.
+- Large file lists can be truncated resulting in applying files out of order. Requires manual intervention to fix.
+- Requires an external process (tmanagerd) to monitor transfers and perform various tasks needed after transfers completed.
+- Being both a general purpose ftp server and third party code, it is not straight forward to expand its feature set.
+
+To solve these issues, a new  transport mechanism will be implemented. In general it will be a complete replacement for ftp transfers. Beyond that it will allow for adding additional features including taking over all the work related to transport done by tmanagerd.
+
+\subsection genre_sec General Requirements
+
+- R1. All general requirements from the Master PRD related to Platform support, code ownership, no royalty, licensing encumbrance free etc need to be met. 
+
+\subsection minreq_sec Minimum Requirements (first release)
+- R2. Run on Configuration Server (CS) and stand alone Process Server (PS)
+
+- R3. support the following operations
+
+  - R3.1. put file. 
+  Puts a file to cxps.
+
+  - R3.2. get file.
+  Gets a file from cxps
+
+  - R3.3. delete files.
+  Deletes a file from cxps
+
+  - R3.4. list files.
+  Lists files on cxps
+
+  - R3.5. rename files.
+  Renames a file on cxps
+
+- R4. support non-secure transfer.
+In non-secure transfer data will be sent unencrypted
+
+- R5. support secure transfer.
+In secure transfer data will be sent encrypted using SSL protocol
+
+- R6. run on the following systems
+  - Windows (server and client)
+  - Linux (server and client)
+  - Solaris/OpenSolaris (client only)
+  - AIX (client only)
+  - HP-UX (client only)
+
+- R7. track data transfers between client and server this is used for network usage reports. It should capture at a minimum (but not limited to)
+  - client ip
+  - type of transfer  (put/get)
+  - file name
+  - total data sent in bytes
+
+- R8. continue to support ftp transfer.
+This allow upgrade to new transport server while clients are still using ftp will allow switching back to ftp server if an issue shows up in the field that can not be quickly resolved
+
+\subsection addreq_sec Additional Requirements (after initial set is complete)
+
+Once the minimum set of features are complete, additional functionality will be added. Some of these are currently performed by tmanagerd. so as they are added to the new transport, it will require additional changes to make sure tmanagerd does not attempt to perform those features. They are denoted by (tmangerd) after the feature.
+
+In general the reason for adding tmanagerd features to the new transport is to avoid the need for the extra process to perform those tasks. This will improve performance as well as simplify things.
+
+- R9. support in-line compression (tmnagerd).
+This avoids the extra I/O of writing the data to disk uncompressed and then having to read it, compress it and re-write it to disk
+
+- R10. support 'moving' difference files from source directory to target directory (tmanagerd).
+This allows a rename file request to include the target directory (renames are general done in place in the source directory and later tmangerd will move them to their proper target directory). Need to support
+
+  - R10.1. source directory and target directory are in different filesystems.
+  When source directory and target directory are on different filesystems, a simple rename will not work.
+
+  - R10.2. one-to-n replication. 
+  Need to avoid making multiple copies of the source file to each target directory. Note is is possible that in one-to-n some of the targets are in the same filesystem as source while others are not.
+
+- R11. support direct file transfer (FILE protocol).
+Used to avoid hitting the network (even if optimized with local loop back) when the server and client are running on the same machine
+
+- R12 support some form of crc to detect.
+This is to catch issues with the data ASAP with in the transfer process
+
+- R13 keep in-memory list of all files.
+This will avoid issues with walking directories as getting the next directory entry is not atomic on all file systems. That can result in missing some files that can result in out of order applies
+
+- R14 directly report data transfer information to CS (tmanagerd).
+This is to avoid all the extra work done to get transfer information to the CS
+
+- R15 keep in-memory information about disk usage and report it directly to CS (tmanagerd).
+This avoids most of the extra calls need to get disk usage which can be expensive and increases I/O. Note there are some directories out side of the new transport's direct purview that need to be monitored for disk usage. For those, it will still  result in extra calls. Disk usage is needed track its high/low water marks.
+
+- R16 have cxps create the socket connection to host machine.
+When cxps is running on premise and the host machine is not, it is desirable (preferable) to have cxps create the socket connection to the host instead of the host connecting to cxps. This avoids the need to open ports in the on premise site which is often meet with resistance and can take a long time to get approved.
+
+<hr>
+\section overview_sec Overview
+This section will discuss, at a high level, the features to be incorporated with in cxps and its client. It will also serve to track features with out having to flesh out the details until they are to be implemented. As such there maybe features discussed in this section but not covered in detail later in this document.
+
+Note Rn (where n is a requirement number) will be used through out this document to show where requirements have been considered and/or met. Not all requirements will be implemented prior to release. Only the ones needed for the first release will be implemented immediately. The others will be implemented in future releases.
+
+\subsection highlevel_sec High Level View
+
+cxps will run as part of the Process Server (PS) (R2). The following diagram shows cxps running as part of the PS. 
+
+\image html "../cxps-context.png"
+\image latex "../cxps-context.png"
+
+The connection between the Client and cxps will be HTTP protocol when the Client and cxps are running on different systems and FILE protocol will be used when they are running on the same system.
+
+\subsection req_subsec Requests (R3)
+As cxps is a replacement for FTP, it needs to support all the features currently used with FTP. These are
+
+- put file (R3.1)
+- get file (R3.2)
+- delete file (R3.3)
+- list file (R3.4)
+- rename file (R3.5)
+
+While cxps is a replacement for FTP, it will not implement FTP, instead it will use HTTP.
+
+Sessions will be used by cxps to track client connections. There will be one client connection per session. A session identifier generated by cxps will be used to uniquely identify a given session. This session id will be sent back to the client. It can then be used in logs on both client and cxps sides to associate client log entires with corresponding cxps log entries. Sessions will be long lived to avoid the overhead of tcp/ip connect/close handshakes. To support long lived connections a few additional requests will be needed
+
+- login
+- logout
+- heartbeat
+
+With FTP a user/password is sent to confirm you are allowed to perform the request, cxps will instead use a form of signing requests. This will require a “secret” that both the client and server know but no one else knows. Request signing will be used for both secure and non secure connections. Once a session is successfully connected, it will stay connected for all subsequent requests.
+
+The client will also include a timestamp and a request id that is incremented for each request. These will aide in preventing man in the middle attacks as well as replay attacks. This is done for both secure and non secure transfers.
+
+Logout will close the connection thus the session.
+
+The heartbeat is sent to avoid a session time out when there are long periods of inactivity for an active session. The heartbeat request will be smart about sending the actual heartbeat and only send the heartbeat if the last activity time is greater then a specified threshold. Not only will this avoid overwhelming the server with heartbeats, it will keep the logic for sending heartbeats on the client side simple. Just send a heartbeat when ever it wants and do not worry about the details of last activity time, etc.
+
+For more details see BasicServer, Server, SslServer, BasicSession, Session, SslSession, RequestHandler, ProtocolHandler, HttpProtocolHandler, HttpResponseCode, HttpTraits, Reply, ClientAbc, BasicClient, Client, SslClient
+
+Status: completed.
+
+\subsection platform_subsec Platforms (R6)
+As cxps needs to run on Windows (R6.1) and Linux (R6.2) and client side needs to run on those platforms plus Solaris (R6.3), AIX (R6.4) and HP-UX (R6.5), boost::asio will be used as the transport library (see http://www.boost.org for details on boost::asio). Some of the reasons boost was chosen
+
+- parts of boost library are already in use in the product
+- meets all licensing requirements (R1)
+- supports all platforms that need to be supported (R6)
+- cxps will be written in C++ and boost::asio uses modern C++ techniques
+- supports SSL for secure transport (R5)
+- well used and tested
+- eliminates the need to build from scratch
+
+General cross-platform support will be provided by boost and other libraries where appropriate. For code that needs to be written from scratch, cxps will follow the approach to keep code as platform agnostic as possible. When specific platform code is needed, it will be placed under the appropriate platform sub directory. The use of #ifdefs for cross-platform support will be avoided to keep the code clean (see the article "#ifdef Considered Harmful, or Portability Experience With C News" by Henry Spencer and Geoff Collyer).
+
+For more details on boost itself, see boost documentation. 
+
+For more details on how/where boost::asio is used see ConnectionAbc, BasicConnection, Connection, SslConnection, BasicServer, Server and SslServer
+
+Status: completed
+
+\subsection log_subsec Logging (R7)
+cxps needs to log transfer requests as well as errors and will also want to have some form of monitoring. It will have separate logs for transfers, errors (warnings) and monitoring. It will use  a simple logging mechanism that includes the ability to enable/disable logging on an individual basis.
+
+For more detail see SIMPLE_LOGGER::SimpleLogger, cxpslogger.h cxpslogger.cpp, and cxps.conf
+
+Status: completed
+
+\subsection secure_subsec Secure Transfer (R5)
+cxps will need to support secure data transfer. Server side certificate will be used. Along with Diffe-Hellman for key exchange. Secure transfer will be done using the SSL features provided by boost::asio. This includes using openssl library.  As with the other third party libraries used, OpenSSL
+
+- is already used in other parts of the product.
+- meets all licensing requirements (R1)
+- supports all platforms that need to be supported (R6)
+
+Self-signed certificates will be used. The gencert command line tool is used to generate the self-signed certificate and Diffie-Hellman files needed during installation (or when ever a new certificate is needed). The following command line generates everything needed and stores the output into the well known locations
+
+  gencert -n ps —dh
+
+There is a connection passphrase that is also required and is provided during installation. This is used to sign all requests. Note signing requests is done for both non secure and secure requests.
+
+The following approach is used to verify both the client and cxps when the client logs into cxps.
+
+\li client connects to cxps
+\li cxps sends its certificate back to client
+\li client logins into cxps signing the login request using the connection passphrase and adds the certificate’s fingerprint to the string that is signed.
+\li cxps reads the request, builds the request string and signs it with the connection passphrase. If the digest matches the one sent with the client login, then cxps knows the request came from a valid client.
+\li cxps sends a response, either validation failed or success. In success case it has signed the response with the connection passphrase and included the certificate’s fingerprint in string that was signed.
+\li client receives the response. If the responses indicates failure, then just reports validation failed. If success, the client will build the same string and sign it. If the digest matches the one sent with the response, then the client knows it got the response from a valid cxps and that the certificate is also from the cxps. 
+
+At this point there is a secure trusted connection between the client and server.
+
+For more details see SslSession, SslServer, SslConnection, SslClient, CxpsSslContext
+
+Status: completed
+
+\subsection compression_subsec Compression (R9)
+cxps will need to support in-line compression. zlib was chosen because
+
+- it is already used in other parts of the product
+- meets all licensing requirements (R1)
+- supports all platforms that need to be supported (R6)
+
+For more details see Zflate and ZdeflateImp and ZinflateImp
+
+Status: completed
+
+\subsection move_subsec Moving Files (R10)
+Moving files from source directory to the target directory seems fairly easy as a simple rename could accomplish the move with out having to actually read/write the file. However there are two cases where a simple rename will not work
+
+-# Source directory is on a different filesystem then the target
+directory (R10.1)
+-# there are multiple target directories (R10.2)
+
+To be efficient and avoid reading/writing data where possible, symbolic links can be used to 'move' files from source directory to target directory as well as handle multiple targets. But symbolic links will fail if the source directory is on a different filesystem then the target directory. So a check can be done to see if source directory and target directories are on the same filesystem, if so use symbolic link, if not then need to copy the file from source directory to target directory. This should also take into account multiple target directories where some are on the same filesystem as the source directory and some are not.
+
+for more details see  RequestHandler::renameFile and RenameFinal
+
+Status: completed
+
+\subsection file_subsec FILE Protocol (R11)
+FILE protocol is used when the cxps is on the same system as the client. In this case direct file apis will be used instead of sockets. This will be accomplished by having a FileClient that exposes the same interface as Client but implements it using direct file apis.
+
+for more details see FileClient Fio, and FioImp
+
+Status: completed
+
+\subsection crc_subsec CRC (R12)
+To be able to identify data issues as early as possible in the transfer process, some form of crc should be used. The current format used for transferring data already has the ability to add a hash value. The issue is that in some cases, the sender can not calculate the hash for the entire file prior to starting the send. So it would not be able to fill in the hash. Plus using a single hash for the entire file would require sending the entire file before validating the hash.
+
+The put file and get file apis could include a hash for the current chunk of data being sent. That would allow validating the data even when generating a hash for the full data is not practical to precomputed. It also allows detecting issues early on in the send/get without having to send/get the entire file before validating.
+
+Status: not implemented
+
+\subsection xferdata_subsec Directly Send Transfer Data to CS (R13)
+
+This data is used by CS to generate network usage graphs. Currently tmanagerd processes the xfer log file generated by cxps. It creates a difference file between the current xfer log file and a back up it made the last time it performed this task and sends the difference file to CS. As cxps is the one tracking the transfers it could just periodically send this information to CS.
+
+Status: not implemented
+
+\subsection diskusage_subsec Track Disk Usage (R14)
+
+Currently tmanagerd tracks disk usage and reports that to the CS. This is needed to make sure usage is kept with in specified thresholds. This can be an expensive operation. Most of this can be avoided by having cxps track disk usage for all the transfers and periodically send that to the CS directly.
+
+There are some directories that are outside the purview of cxps that need to be tracked. Those will still require the more expensive calls, but this can be limited to just those directories thus reducing the over all impact.
+
+Finally when FILE protocol is being used, cxps does not actually see the data transfers as that is all done with in the client. To avoid having to go back to full periodic checking of all directories when using FILE protocol, a simple IPC interface can be used to allow the client to send needed information to the cxps (it will be running locally as it is needed by the remote clients).
+
+Status: not implemented
+ 
+\subsection cfssec Have cxps create the socket connection to host machine. (R16)
+
+Currently all connections between a host agent (s2, dataprotection, cachemgr) are initiated by that agent to cxps. That is natural given cxps is the server and the agents are the clients. However when the cxps is running on premise and the host agent is running off premise this becomes an issue as it requires opening ports on the cxps machine running on premise. This is often meet with resistance and in most cases has to go through a lengthy approval process. To avoid this issue it would be desirable to have the cxps connect to the agents. There are several issues with this, the main ones being
+
+- agents are not designed to accept connections
+- agents control the number of connections they want with the cxps based on various factors 
+- agents will start/stop making it complicated for cxps to know when to (re)connect 
+- there are multiple agent processes and the number varies with the number of volumes being protected, that would make it impractical to have agent processes accept connections.
+
+While the host agent side could be re-architected to eliminate the issues, that would require a lot of work. Ideally would like to have cxps connect to host agents with little to no change to the agents as well as not requiring the cxps to become all knowing about how the agents work. With that in mind the approach will be to have a what is referred to as a “Connection Forwarding Server” (CFS) which will be cxps running in CFS mode. 
+
+The following diagram shows the CFS in context with cxps and agent. 
+
+\image html "../cxps-to-cfs-before-after.png"
+\image latex "../cxps-to-cfs-before-after.png"
+
+Note the local* connection will use
+- Unix Domain Socket when the host is non-windows
+- loopback when running on windows
+
+When using CFS the only thing that actually changes is how the connection between the agent process and cxps is created. The following diagram provides a little more detail on the connection process
+
+\image html "../cfs.png"
+\image latex "../cfs.png"
+
+-# cxps connects to CFS:cxps to establish control connection
+-# agent issues connect request (that actually goes to CFS:cxps)
+-# CFS:cxps forwards the connect request over the control connection to cxps
+-# cxps creates a new connection back to CFS:cxps
+-# CFS::cxps passes the new connection back to agent
+-# agent starts using connection as if it had directly connected to cxps
+
+Note when the cxps connects back to the CFS:cxps it will always do this over the “non secure” port to create the connection. When that connection is passed back to the requesting agent, the agent will then perform the secure handshake if a secure connection between the PS and target was requested. This is known as explicit secure. It is done this way because the secure portions of the connection can not be passed between the CFS:cxps and the requesting agent. There is minimal data sent over that initial connection (session id, request id and the digest). It does not contain any identifying or compromising information, the data is signed and protected against reply attacks. That means while a man in the middle can see the data, there is nothing they can do with it. If they try to reply it, it will be rejected, if they try to create their own request, it will fail validation as they do not have the connection passphrase needed to sign the request. Finally, even if some how they were able to get a connection established, they would not be able to complete the login process. 
+
+A side note about implicit vs. explicit secure. There is nothing special about a port and if you can use secure or not. Just by convention you often have a secure port that implies a secure connection is required and both sides will just automatically setup a secure connection. The non secure port typically is always non secure and neither side will setup a secure connection. However there is nothing preventing setting up a secure connection over a non secure port. Just that both sides need to know that a secure connection should be used so they both know to set it up. This is called explicit secure, in that secure is explicitly requested. This is what CFS does. There are protocols that also do this. E.g. ftp use explicit secure where the connections are over non secure ports (20 data 21 control) and switch to secure using the same ports when requested. Implicit ftp requires the secure connection to be setup before any commands are sent. This is done using the implicit secure ports (989 data, 990 control).
+
+With the CFS approach the agent processes do not require any changes. They continue to work as if they are connecting directly to the cxps. The majority of changes are in the cxps code (both server and client). A new CFS protocol will be introduced to indicate when this should be used. Some changes will be needed to the CS to set the CFS protocol in the replication pairs when appropriate. 
+
+To support CFS, the DB will have a new table, named cfs, that will contain
+
+\li id: host id of the system CFS:cxps is running on|
+\li publicIpAddress: public ip used to access CFS:cxps. Typically mapped to the private IP
+\li publicPort: public non secure port typically mapped to the private non secure port
+\li publicSslPort: public secure port typically mapped to the private secure port
+\li privateIpAddress: private ip address
+\li privatePort: private port. Typically 9080
+\li privateSslPort: private secure port. Typically 9443
+\li connectivityType: indicates if VPN is being used or not
+\li heartbeat: UTC time of last time CFS:cxps sent a heartbeat to CS
+
+And a new column will be added to srcLogicalVolumeDestLogicalVolume
+
+\li useCfs: indicates if cfs should be used for a given pair, 0 no CFS. 1 use CFS on the target (MT) side.
+
+If in the future support for source side CFS is needed, then useCFs could have a value of say 2 to indicate source side but not target side and 3 to indicate both source and target side should use CFS. Although there should never be a reason for both sides to use CFS. 
+
+There will also be a new CS api used by the cxps to talk to the CS. This new CS API is being integrated into CXAPI.php so that the same script will be used as other CX communication. The main reason for a new CS API is that it will use json for data exchange format as that is simpler for cxps to work with then xml. Also the configurator is not being used for several reasons, the main one being cxps has it own network communication capabilities, so it does not make sense to pull in yet another third party library libcurl for network communications.
+
+The new CS api will support both secure and non secure connections. Secure connection will use the CS certificate (not the fingerprint) to validate the CS. All requests, secure and non secure, will be signed that will allow the CS to validate the client.
+
+Initially this new CS API will be used by cxps to get the list of host machines that are using CFS protocol so it can establish the CFS control connection. Eventually this new CS api will be expanded to support other communication needs between cxps and CS (e.g. sending the data as part of \ref xferdata_subsec and \ref diskusage_subsec).
+
+Status: complete
+
+<hr>
+\section usagesec Adding Requests to cxps
+
+This section provides information on how to add a new request to the server and client. The changes are not that complicated (well the actual function to perform the new request might be complicated, but all the "extra" stuff one needs to do is fairly simple). 
+
+\n note in the description that follows
+- \<Name> should be replaced withe the actual name of the function being added
+- \<Name> should follow the same naming convention as the other functions in the file that is being changed. I.E. use the same style of upper and lower case and any underscores
+- you can always look at an existing request to see exactly what needs to be done
+
+\subsection protohand_sec ProtocolHandler
+you need to add the following
+
+- \#define HTTP_REQUEST_<NAME>
+- any required \#define HTTP_PARAMS_
+- format\<Name>Request function
+
+changes need to be made in protocolhandler.h (ProtocolHandler is header only)
+
+\subsection reqhand_sec RequestHandler
+you need to add the following
+- \<Name> function
+- register the \<Name> function in the registerRequests function
+
+changes need to be made in requesthandler.h and requesthandler.cpp
+
+\n note
+- \<Name> function is the top level function that will perform the request. It may involve multiple support functions.
+- you really need to look at the other requests to see all the "boiler plate" stuff that needs to be done before and after the request is actually performed. The main steps are:
+
+- get all the parameters
+- log request has started
+- authenticate the request (if needed)
+- perform the request
+- log request done
+- return the results
+
+- if while performing the request, async network access needs to be performed, you will need to add async\<Name> and handleAsync\<Name> functions.
+- Again there are existing requests that show how to do all of this
+
+\subsection auth_sec Authentication
+If the request needs to be authenticated, you need to add the following
+- verify\<Name>Id function
+- build\<Name>Id function
+
+changes need to be made in authentication.h (authentication is header only)
+
+\subsection client_sec Client
+add the following
+- \<Name> function.
+
+changes need to be made in client.h (client is header only)
+
+\n note
+- the \<Name> function should be the same as the one used in the RequestHandler
+- make sure to add these to all the client classes that need them
+
+\subsection cxtrans_sec CxTransport
+add the following
+- \<Name> function.
+
+changes need to be made in cxtransport.h, cxtransport.cpp, cxtransportimpclient.cpp and cxtransportimpclient.h.
+
+\n note
+- the \<Name> function should be the same as the one used in the RequestHandler
+
+\subsection transportstream_sec TransportStream
+add the following
+- \<Name> function
+
+changes need to be made in transportstream.cpp and transportstream.h
+
+\note
+- the naming is slightly different in here, but since these would be new you should use the same \<Name>
+used in ProtocolHandler (except the upper and lower casing may need to be different)
+\par
+
+<hr>
+\section clientpage Client Usage
+
+There are several parts to the client side.
+
+\subsection newclient_sec Client
+
+The new client (found in client.h) is used to talk to the cxps.
+
+To use the new client you need to include client.h, add cxpslib and boost to your include directory paths and link against the boost and openSSL libraries. You do not need to link against the cxpslib as the Client is header only.
+
+\subsection cxtrasclient_sec CxTransport
+
+The new client supports FILE protocol.
+
+The CxTransport creates the proper client based on the protocol that is returned by the CX. The rules on the CX side as to what protocol to use are
+- cx and agent (making request) are not on the same machine, use HTTP (value is 1)
+- cx and agent (making request) are on the same machine, use FILE (value is 2)
+
+To use the CxTransport you need to follow the steps listed in the new Client section, but instead of directly creating the Client, you create CxTransport. It will instantiate the correct client based on the transport protocol passed in.
+
+\subsection ctransstream_sec TransportStream
+
+s2 and s2libs use a slightly different interface then other parts of the code. To avoid changing the interface (this maybe done in the future), TransportStream is used as a wrapper around CxTransport.
+
+To use the TransportStream follow the steps listed in the CxTransport section, but instead of creating a CxTransport, you create a TransportStream. It will instantiate the correct client based on the transport protocol passed in.
+
+\subsection cxpsclient_sec cxpsclient
+
+cxpsclient (see the examples) is a client tester that shows how to use all the parts of the client. Run cxpsclient -h to get complete details on how to use cxpslcient. If new requests are added or existing requests are modified, add them to cxpsclient to test the changes.
+
+<hr>
+\section dopage Do or Do Not (no try)
+
+- use boost over Ace
+- add doxygen style documentation for all code. Use the file name and file brief description in all files. All other doxygen documentation should go in header files (unless there is only a source file)
+- follow the formatting style that is being used.
+- use spaces for formatting code, do not use tabs anywhere in the source files
+- do not add Debugprintf in any part of this code. The cxps has its own logging. Users of the Client are responsible for logging errors not the Client itself.
+- if parts of cxpslib are useful for general purpose, they should be moved out from the cxpslib into their own directory instead of being used directly from the cxpslib. Even if it is a header only file.
+
+*/ 
+
+ 

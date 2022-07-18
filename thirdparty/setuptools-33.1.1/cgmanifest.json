@@ -1,0 +1,14 @@
+{
+    "Registrations": [
+        {
+            "Component": {
+                "Type": "pip",
+                "Pip": {
+                    "Name": "setuptools",
+                    "Version": "33.1.1"
+                }
+            }
+        }
+    ],
+    "Version": 1
+}

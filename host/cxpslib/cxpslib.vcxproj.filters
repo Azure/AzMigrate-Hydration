@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+    <Filter Include="Header Files\win">
+      <UniqueIdentifier>{b40264df-b4d9-42e7-b388-9255a8770b1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\win">
+      <UniqueIdentifier>{a42d83f8-1f96-4496-9c64-51421cbfabc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Telemetry">
+      <UniqueIdentifier>{2d35bcb8-0bf2-4878-87e4-2d1eb316eefc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Telemetry">
+      <UniqueIdentifier>{f4ba0ba7-a5a8-451f-85f5-9e508e32dab5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Telemetry\Rows">
+      <UniqueIdentifier>{712aab99-d892-4328-9da0-7e06feded5d4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cxpslogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cxpsmsgqueue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="requesthandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="serverctl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="serveroptions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="session.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cfscontrolclient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cfsmanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="win\cfsserver.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\cfssession.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\requesthandlermajor.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\sessionidmajor.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="win\sessionidminor.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="Telemetry\SourceFilePathParser.cpp">
+      <Filter>Source Files\Telemetry</Filter>
+    </ClCompile>
+    <ClCompile Include="Telemetry\cxpstelemetrylogger.cpp">
+      <Filter>Source Files\Telemetry</Filter>
+    </ClCompile>
+    <ClCompile Include="Telemetry\TelemetryRows.cpp">
+      <Filter>Source Files\Telemetry</Filter>
+    </ClCompile>
+    <ClCompile Include="win\cxpsmajor.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="ThrottlingHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DiffResyncThrottlingHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pssettingsconfigurator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="win\idempotency.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="authentication.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="connection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="createpaths.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cxpslogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cxpsmsgqueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cxtransportdefines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="genrandnonce.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protocolhandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protocoltraits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="renamefinal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reply.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="requesthandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="responsecode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="serverctl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="serveroptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="session.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tagvalue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wallclocktimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="csclient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cxps.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cxpssslcontext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="removerepeating.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sessionid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sessiontracker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="urlencoding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="writemode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cfscontrolclient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cfsdata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cfsmanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cfsprotocol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="win\cfsserver.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\cfssession.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\clientmajor.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\cxpsmajor.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\sessionidmajor.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\sessionidminor.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\setsockettimeouts.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="win\strutils.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="Telemetry\TelemetryCommon.h">
+      <Filter>Header Files\Telemetry</Filter>
+    </ClInclude>
+    <ClInclude Include="Telemetry\Stringer.h">
+      <Filter>Header Files\Telemetry</Filter>
+    </ClInclude>
+    <ClInclude Include="Telemetry\RequestTelemetryData.h">
+      <Filter>Header Files\Telemetry</Filter>
+    </ClInclude>
+    <ClInclude Include="Telemetry\SourceFilePathParser.h">
+      <Filter>Header Files\Telemetry</Filter>
+    </ClInclude>
+    <ClInclude Include="Telemetry\TelemetryMaps.h">
+      <Filter>Header Files\Telemetry</Filter>
+    </ClInclude>
+    <ClInclude Include="Telemetry\cxpstelemetrylogger.h">
+      <Filter>Header Files\Telemetry</Filter>
+    </ClInclude>
+    <ClInclude Include="Telemetry\FileTelemetryData.h">
+      <Filter>Header Files\Telemetry</Filter>
+    </ClInclude>
+    <ClInclude Include="Telemetry\CxpsPerfCounters.h">
+      <Filter>Header Files\Telemetry</Filter>
+    </ClInclude>
+    <ClInclude Include="Telemetry\Rows\EmptyCxpsTelemetryRow.h">
+      <Filter>Header Files\Telemetry\Rows</Filter>
+    </ClInclude>
+    <ClInclude Include="Telemetry\Rows\SourceFileTelemetryRow.h">
+      <Filter>Header Files\Telemetry\Rows</Filter>
+    </ClInclude>
+    <ClInclude Include="Telemetry\Rows\SourceGeneralTelemetryRow.h">
+      <Filter>Header Files\Telemetry\Rows</Filter>
+    </ClInclude>
+    <ClInclude Include="Telemetry\Rows\GlobalCxpsTelemetryRow.h">
+      <Filter>Header Files\Telemetry\Rows</Filter>
+    </ClInclude>
+    <ClInclude Include="Telemetry\Rows\CxpsTelemetryRowBase.h">
+      <Filter>Header Files\Telemetry\Rows</Filter>
+    </ClInclude>
+    <ClInclude Include="ThrottlingHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResponseData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientCode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\errorexception\throttlingexception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Telemetry\TelemetrySharedParams.h">
+      <Filter>Header Files\Telemetry</Filter>
+    </ClInclude>
+    <ClInclude Include="DiffResyncThrottlingHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pssettingsconfigurator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cxpsheaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

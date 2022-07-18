@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BE28959D-6CE5-4CA4-B8D7-9F6075E5B10F}</ProjectGuid>
+    <RootNamespace>ConfiguratorAPITestBed</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <SpectreMitigation>Spectre</SpectreMitigation>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="..\..\win-rules.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="..\..\win-rules.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="..\..\win-rules.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="..\..\win-rules.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.21005.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>Debug\</OutDir>
+    <IntDir>Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+    <EmbedManifest>false</EmbedManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+    <EmbedManifest>false</EmbedManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>Release\</OutDir>
+    <IntDir>Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\errorexception;..\..\cxpslib;..\..\curlwrapperlib;..\$(OPENSSL_INCLUDES);..\..\inmsafeint;..\..\inmsafeint\win;..\..\inmsafecapis;..\..\inmsafecapis\win;..\..\common\win32;../../common;../../config/win;../../config;../../dataprotection;..\$(BOOST_INCLUDES);..\$(ACE_INCLUDES);..\..\s2libs\thread;../../tal;..\..\s2libs\foundation;..\..\cdplibs;..\cdplibs\v1;..\cdplibs\v3;..\..\s2libs;..\..\drivers\Include\win32;..\configfortestbed;..\$(CURL_INCLUDES);..\..\cdpapplylib;..\..\InmXmlParser;..\..\disklayoutmgr;..\$(SIGSLOT_INCLUDES);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;SV_WINDOWS;DP_PORTABLE;ACE_AS_STATIC_LIBS;_LARGEFILE_SOURCE=1;_LARGEFILE64_SOURCE=1;_FILE_OFFSET_BITS=64;CURL_STATICLIB;WIN32_LEAN_AND_MEAN;SV_USES_LONGPATHS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>configfortestbed.lib;hostagenthelpers.lib;tal.lib;imagehlp.lib;version.lib;zlib.lib;Ws2_32.lib;libcurl.lib;wininet.lib;winmm.lib;libssl.lib;libcrypto.lib;ACEsd.lib;sqlite3x.lib;sqlite.lib;cdplibs.lib;log.lib;s2libs.lib;psapi.lib;Iphlpapi.lib;mpr.lib;inm_md5.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)ConfiguratorAPITestBed.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\$(BOOST_LIB_DIR);..\$(ACE_LIB_DIR);..\..\s2libs\$(Configuration);..\..\config\configfortestbed\$(Configuration);..\..\tal\$(Configuration);..\..\common\$(Configuration);..\$(OPENSSL_LIB_DIR_DEBUG);..\$(CURL_LIB_DIR_DEBUG);..\$(ZLIB_LIB_DIR);..\..\snapshotmgr\$(Configuration);..\..\Retention\$(Configuration);..\$(SQLITE_LIB_DIR_DEBUG);..\$(SQLITE3X_LIB_DIR_DEBUG);..\..\cdplibs\$(Configuration);..\..\vacplibs\$(Configuration);..\..\vsnaplib\$(Configuration);..\..\log\$(Configuration);..\$(INM_MD5_LIB_DIR_DEBUG);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)ConfiguratorAPITestBed.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\inmsafeint;..\..\inmsafeint\win;..\..\inmsafecapis;..\..\inmsafecapis\win;..\..\common\win32;../../common;../../config/win;../../config;../../dataprotection;..\$(BOOST_INCLUDES);..\$(ACE_INCLUDES);..\..\s2libs\thread;../../tal;..\..\s2libs\foundation;..\..\cdplibs;..\cdplibs\v1;..\cdplibs\v3;..\..\s2libs;..\..\drivers\Include\win32;..\configfortestbed;..\$(CURL_INCLUDES);..\..\cdpapplylib;..\..\InmXmlParser;..\..\disklayoutmgr;..\$(SIGSLOT_INCLUDES);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;SV_WINDOWS;DP_PORTABLE;ACE_AS_STATIC_LIBS;_LARGEFILE_SOURCE=1;_LARGEFILE64_SOURCE=1;_FILE_OFFSET_BITS=64;CURL_STATICLIB;WIN32_LEAN_AND_MEAN;SV_USES_LONGPATHS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>configfortestbed.lib;hostagenthelpers.lib;tal.lib;imagehlp.lib;version.lib;zlib.lib;Ws2_32.lib;libcurl.lib;wininet.lib;winmm.lib;libssl.lib;libcrypto.lib;ACEsd.lib;sqlite3x.lib;sqlite.lib;cdplibs.lib;log.lib;s2libs.lib;psapi.lib;Iphlpapi.lib;mpr.lib;inm_md5.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)ConfiguratorAPITestBed.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\$(BOOST_LIB_DIR);..\$(ACE_LIB_DIR);..\..\s2libs\$(Configuration);..\..\config\configfortestbed\$(Configuration);..\..\tal\$(Configuration);..\..\common\$(Configuration);..\$(OPENSSL_LIB_DIR_DEBUG);..\$(CURL_LIB_DIR_DEBUG);..\$(ZLIB_LIB_DIR);..\..\snapshotmgr\$(Configuration);..\..\Retention\$(Configuration);..\$(SQLITE_LIB_DIR_DEBUG);..\$(SQLITE3X_LIB_DIR_DEBUG);..\..\cdplibs\$(Configuration);..\..\vacplibs\$(Configuration);..\..\vsnaplib\$(Configuration);..\..\log\$(Configuration);..\$(INM_MD5_LIB_DIR_DEBUG);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)ConfiguratorAPITestBed.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\errorexception;..\..\cxpslib;..\..\curlwrapperlib;..\$(OPENSSL_INCLUDES);..\..\inmsafeint;..\..\inmsafeint\win;..\..\inmsafecapis;..\..\inmsafecapis\win;../../common;../../config;../../config/win;../../dataprotection;..\$(BOOST_INCLUDES);..\$(ACE_INCLUDES);..\..\s2libs\thread;../../tal;..\..\s2libs\foundation;..\..\cdplibs;..\cdplibs\v1;..\cdplibs\v3;..\..\s2libs;..\..\common\win32;..\..\drivers\Include\win32;..\configfortestbed;..\$(CURL_INCLUDES);..\..\cdpapplylib;..\..\InmXmlParser;..\..\disklayoutmgr;..\$(SIGSLOT_INCLUDES);$(ESJSON_INCLUDES);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0502;WIN32;NDEBUG;_CONSOLE;SV_WINDOWS;ACE_AS_STATIC_LIBS;_LARGEFILE_SOURCE=1;_LARGEFILE64_SOURCE=1;_FILE_OFFSET_BITS=64;CURL_STATICLIB;WIN32_LEAN_AND_MEAN;DP_PORTABLE;BASIC_TEST;SV_USES_LONGPATHS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Crypt32.lib;configfortestbed.lib;hostagenthelpers.lib;tal.lib;imagehlp.lib;version.lib;zlib.lib;Ws2_32.lib;libcurl.lib;wininet.lib;winmm.lib;libssl.lib;libcrypto.lib;ACEs.lib;sqlite3x.lib;sqlite.lib;cdplibs.lib;log.lib;s2libs.lib;psapi.lib;Iphlpapi.lib;mpr.lib;inm_md5.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)ConfiguratorAPITestBed.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\$(BOOST_LIB_DIR);..\$(ACE_LIB_DIR);..\..\s2libs\$(Configuration);..\configfortestbed\$(Configuration);..\..\tal\$(Configuration);..\..\common\$(Configuration);..\$(OPENSSL_LIB_DIR_RELEASE);..\$(CURL_LIB_DIR_RELEASE);..\$(ZLIB_LIB_DIR);..\..\snapshotmgr\$(Configuration);..\..\Retention\$(Configuration);..\$(SQLITE_LIB_DIR_RELEASE);..\$(SQLITE3X_LIB_DIR_RELEASE);..\..\cdplibs\$(Configuration);..\..\vacplibs\$(Configuration);..\..\vsnaplib\$(Configuration);..\..\log\$(Configuration);..\$(INM_MD5_LIB_DIR_RELEASE);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)ConfiguratorAPITestBed.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalOptions>/DEBUGTYPE:CV,FIXUP</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\inmsafeint;..\..\inmsafeint\win;..\..\inmsafecapis;..\..\inmsafecapis\win;../../common;../../config;../../config/win;../../dataprotection;..\$(BOOST_INCLUDES);..\$(ACE_INCLUDES);..\..\s2libs\thread;../../tal;..\..\s2libs\foundation;..\..\cdplibs;..\cdplibs\v1;..\cdplibs\v3;..\..\s2libs;..\..\common\win32;..\..\drivers\Include\win32;..\configfortestbed;..\$(CURL_INCLUDES);..\..\cdpapplylib;..\..\InmXmlParser;..\..\disklayoutmgr;..\$(SIGSLOT_INCLUDES);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0502;WIN32;NDEBUG;_CONSOLE;SV_WINDOWS;ACE_AS_STATIC_LIBS;_LARGEFILE_SOURCE=1;_LARGEFILE64_SOURCE=1;_FILE_OFFSET_BITS=64;CURL_STATICLIB;WIN32_LEAN_AND_MEAN;DP_PORTABLE;BASIC_TEST;SV_USES_LONGPATHS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>configfortestbed.lib;hostagenthelpers.lib;tal.lib;imagehlp.lib;version.lib;zlib.lib;Ws2_32.lib;libcurl.lib;wininet.lib;winmm.lib;libssl.lib;libcrypto.lib;ACEs.lib;sqlite3x.lib;sqlite.lib;cdplibs.lib;log.lib;s2libs.lib;psapi.lib;Iphlpapi.lib;mpr.lib;inm_md5.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)ConfiguratorAPITestBed.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\$(BOOST_LIB_DIR);..\$(ACE_LIB_DIR);..\..\s2libs\$(Configuration);..\configfortestbed\$(Configuration);..\..\tal\$(Configuration);..\..\common\$(Configuration);..\$(OPENSSL_LIB_DIR_RELEASE);..\$(CURL_LIB_DIR_RELEASE);..\$(ZLIB_LIB_DIR);..\..\snapshotmgr\$(Configuration);..\..\Retention\$(Configuration);..\$(SQLITE_LIB_DIR_RELEASE);..\$(SQLITE3X_LIB_DIR_RELEASE);..\..\cdplibs\$(Configuration);..\..\vacplibs\$(Configuration);..\..\vsnaplib\$(Configuration);..\..\log\$(Configuration);..\$(INM_MD5_LIB_DIR_RELEASE);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)ConfiguratorAPITestBed.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="ConfiguratorAPITestBed.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\errorexception;..\..\cxpslib;..\..\curlwrapperlib;..\$(OPENSSL_INCLUDES);..\..\inmsafeint;..\..\inmsafeint\win;..\..\inmsafecapis;..\..\inmsafecapis\win;../../common;../../config;../../config/win;../../dataprotection;..\$(BOOST_INCLUDES);..\$(ACE_INCLUDES);..\..\s2libs\thread;../../tal;..\..\s2libs\foundation;..\..\cdplibs;..\cdplibs\v1;..\cdplibs\v3;..\..\s2libs;..\..\common\win32;..\..\drivers\Include\win32;..\configfortestbed;..\$(CURL_INCLUDES);..\..\cdpapplylib;..\..\InmXmlParser;..\..\disklayoutmgr;..\$(SIGSLOT_INCLUDES);..\..\..\thirdparty\g40-esj-1.05;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="Globals.cpp" />
+    <ClCompile Include="PrintFunctions.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TestGetInitialSettings.cpp" />
+    <ClCompile Include="TestSnapshotAPIs.cpp" />
+    <ClCompile Include="TestVolumeManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Globals.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TestGetInitialSettings.h" />
+    <ClInclude Include="TestSnapshotAPIs.h" />
+    <ClInclude Include="TestVolumeManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ConfiguratorAPITestBed.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AzureRecoveryLib\AzureRecoveryLib.vcxproj">
+      <Project>{3844ec72-39a9-427f-8759-15b735791aae}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\cdpapplylib\cdpapplylib.vcxproj">
+      <Project>{10ef2614-a9a6-4caf-90ac-5a8d978569c0}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\cdplibs\cdplibs.vcxproj">
+      <Project>{59e6f8b4-4dd0-49fb-a224-36b38f1a570e}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\common\hostagenthelpers.vcxproj">
+      <Project>{1c2786b8-492f-4c58-bec6-a57cfb95adbb}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\curlwrapperlib\curlwrapperlib.vcxproj">
+      <Project>{92ba00c2-ef73-42d0-8e73-41013842520b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\cxtransportlib\cxtransportlib.vcxproj">
+      <Project>{9e0ca837-3319-4025-b77f-a63401298aa5}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\disklayoutmgr\disklayoutmgr.vcxproj">
+      <Project>{3ff792f6-0390-4415-9757-a98bfa3ef0ac}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\diskpartwrapper\diskpartwrapper.vcxproj">
+      <Project>{3710ab83-8a71-4cb5-891a-9aef44a79558}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\log\Log.vcxproj">
+      <Project>{da7e75ec-e026-42d5-9315-7e52e8f5b34b}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\npwwn\npwwn.vcxproj">
+      <Project>{fa3d7d03-d8ba-4a16-9a90-e049673a43df}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\s2libs\s2libs.vcxproj">
+      <Project>{aae78f4c-6c2c-4cbc-bbe8-d3df90adcbf9}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\securitylib\securitylib.vcxproj">
+      <Project>{620e652a-08c3-4514-baaa-8b9558d5942e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\tal\tal.vcxproj">
+      <Project>{46fa67f0-05d1-417a-9741-e98527323473}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Windows\WinOpLib\WinOpLib.vcxproj">
+      <Project>{d95f6244-5c8d-4a05-a9a8-6e6dd47f683d}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\config.vcxproj">
+      <Project>{48330794-e280-45a0-9f16-69010ef753bb}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\configfortestbed\configfortestbed.vcxproj">
+      <Project>{a71fec2e-0b8d-4478-93b7-eebb1fc95bd7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\makeserialize.vcxproj">
+      <Project>{35cd2212-4760-4075-883a-b680b0567cfa}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

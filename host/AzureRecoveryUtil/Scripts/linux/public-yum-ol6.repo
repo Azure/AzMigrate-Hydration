@@ -1,0 +1,362 @@
+[ol6_latest]
+name=Oracle Linux $releasever Latest ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/latest/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1
+
+[ol6_addons]
+name=Oracle Linux $releasever Add ons ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/addons/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1
+
+[ol6_ga_base]
+name=Oracle Linux $releasever GA installation media copy ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/0/base/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_u1_base]
+name=Oracle Linux $releasever Update 1 installation media copy ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/1/base/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_u2_base]
+name=Oracle Linux $releasever Update 2 installation media copy ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/2/base/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_u3_base]
+name=Oracle Linux $releasever Update 3 installation media copy ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/3/base/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_u4_base]
+name=Oracle Linux $releasever Update 4 installation media copy ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/4/base/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_u5_base]
+name=Oracle Linux $releasever Update 5 installation media copy ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/5/base/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_u6_base]
+name=Oracle Linux $releasever Update 6 installation media copy ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/6/base/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_u7_base]
+name=Oracle Linux $releasever Update 7 installation media copy ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/7/base/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+
+[ol6_u8_base]
+name=Oracle Linux $releasever Update 8 installation media copy ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/8/base/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_u9_base]
+name=Oracle Linux $releasever Update 9 installation media copy ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/9/base/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_u10_base]
+name=Oracle Linux $releasever Update 10 installation media copy ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/10/base/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_UEKR4]
+name=Latest Unbreakable Enterprise Kernel Release 4 for Oracle Linux $releasever ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/UEKR4/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_UEKR3_latest]
+name=Latest Unbreakable Enterprise Kernel for Oracle Linux $releasever ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/UEKR3/latest/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_UEK_latest]
+name=Latest Unbreakable Enterprise Kernel for Oracle Linux $releasever ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/UEK/latest/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1
+
+[ol6_UEK_base]
+name=Unbreakable Enterprise Kernel for Oracle Linux $releasever ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/UEK/base/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_ceph10]
+name=Ceph Storage for Oracle Linux Release 1.0 - Oracle Linux 6.6 or later ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/ceph10/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_MySQL]
+name=MySQL 5.5 for Oracle Linux 6 ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/MySQL/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_openstack40]
+name=OpenStack 4.0 packages for Oracle Linux 6 (x86_64)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/openstack40/x86_64/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_openstack30]
+name=OpenStack 3.0 packages for Oracle Linux 6 (x86_64)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/openstack30/x86_64/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_openstack21]
+name=OpenStack 2.1 packages for Oracle Linux 6 (x86_64)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/openstack21/x86_64/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+priority=20
+enabled=0
+
+[ol6_gdm_multiseat]
+name=Oracle Linux 6 GDM Multiseat ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/gdm_multiseat/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_MySQL80]
+name=MySQL 8.0 for Oracle Linux 6 ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/MySQL80_community/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_MySQL57]
+name=MySQL 5.7 for Oracle Linux 6 ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/MySQL57_community/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+
+[ol6_MySQL56]
+name=MySQL 5.6 for Oracle Linux 6 ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/MySQL56/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+
+# the following repositories are only available for x86_64 architecture systems
+[ol6_ofed_UEK]
+name=OFED supporting tool packages for Unbreakable Enterprise Kernel on Oracle Linux 6 ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/ofed_UEK/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+priority=20
+
+[ol6_UEKR4_OFED]
+name=OFED supporting tool packages for Unbreakable Enterprise Kernel Release 4 on Oracle Linux 6 ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/UEKR4/OFED/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+priority=20
+
+[ol6_playground_latest]
+name=Latest mainline stable kernel for Oracle Linux 6 ($basearch) - Unsupported 
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/playground/latest/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+
+[ol6_software_collections]
+name=Software Collection Library release 3.0 packages for Oracle Linux 6 (x86_64)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/SoftwareCollections/x86_64/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_spacewalk24_server]
+name=Spacewalk Server 2.4 for Oracle Linux 6 ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/spacewalk24/server/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_spacewalk24_client]
+name=Spacewalk Client 2.4 for Oracle Linux 6 ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/spacewalk24/client/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_spacewalk26_server]
+name=Spacewalk Server 2.6 for Oracle Linux 6 ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/spacewalk26/server/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+
+[ol6_spacewalk26_client]
+name=Spacewalk Client 2.6 for Oracle Linux 6 ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/spacewalk26/client/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_spacewalk27_server]
+name=Spacewalk Server 2.7 for Oracle Linux 6 ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/spacewalk27/server/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_spacewalk27_client]
+name=Spacewalk Client 2.7 for Oracle Linux 6 ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/spacewalk27/client/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_MODRHCK]
+name=Latest RHCK with fixes from Oracle for Oracle Linux $releasever ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/MODRHCK/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+priority=20
+enabled=0
+
+[ol6_oracle_instantclient]
+name=Oracle Intant Client for Oracle Linux $releasever ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/oracle/instantclient/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_developer]
+name=Oracle Linux $releasever Packages for Development and test ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/developer/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+
+[ol6_developer_gluster312]
+name=Oracle Linux $releasever Gluster 3.12 Packages for Development and test ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/developer_gluster312/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_developer_gluster310]
+name=Oracle Linux $releasever Gluster 3.10 Packages for Development and test ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/developer_gluster310/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_developer_php72]
+name=Oracle Linux $releasever PHP 7.2 Packages for Development and test ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/developer_php72/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_developer_php71]
+name=Oracle Linux $releasever PHP 7.1 Packages for Development and test ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/developer_php71/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_developer_php70]
+name=Oracle Linux $releasever PHP 7.0 Packages for Development and test ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/developer_php70/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_developer_nodejs6]
+name=Oracle Linux $releasever Node.js 6 Packages for Development and test ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/developer_nodejs6/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_developer_nodejs8]
+name=Oracle Linux $releasever Node.js 8 Packages for Development and test ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/developer_nodejs8/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_developer_nodejs10]
+name=Oracle Linux $releasever Node.js 10 Packages for Development and test ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/developer_nodejs10/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+
+[ol6_developer_nodejs4]
+name=Oracle Linux $releasever Node.js 6 Packages for Development and test ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/developer_nodejs4/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol6_latest_archive]
+name=Oracle Linux $releasever Archive ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/latest/archive/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+
+[ol6_UEKR4_archive]
+name=Unbreakable Enterprise Kernel Release 4 for Oracle Linux $releasever ($basearch) - Archive
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL6/UEKR4/archive/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0

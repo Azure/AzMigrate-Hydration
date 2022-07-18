@@ -1,0 +1,20 @@
+[OL8_BaseOS]
+name=Oracle Linux 8 x86_64 ISO  BaseOS
+baseurl=file:///var/OSimage/OL8_x86_64/BaseOS
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1 
+enabled=1
+
+[OL8_AppStream]
+name=Oracle Linux 8 x86_64 ISO AppStream
+baseurl=file:///var/OSimage/OL8_x86_64/AppStream
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1 
+enabled=1 
+
+[OL8_Addons]
+name=Oracle Linux $releasever Add ons ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL8/addons/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1

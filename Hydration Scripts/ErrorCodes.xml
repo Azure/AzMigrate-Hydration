@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ErrorCodeDetailMapping>
+    <ErrorCode Number="0">
+        <Description>Success!</Description>
+        <Category>No error</Category>
+        <PossibleCause>Process Completion Successful</PossibleCause>
+        <RecommendedAction>Process Completion Successful</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="1">
+        <Description>Failure!</Description>
+        <Category>Warning</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="2">
+        <Description>Protection Service Error: Failed to create directories used during Hydration on hydration VM</Description>
+        <Category>Warning</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="3">
+        <Description>An internal hydration operation(passing config) failed</Description>
+        <Category>Warning</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="4">
+        <Description>Service Internal: Could not find customer disk</Description>
+        <Category>Warning</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="5">
+        <Description>Could not find OS Volume containing registries/configuration files</Description>
+        <Category>Error</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="6">
+        <Description>Could not load the source registry even before we started making changes(Windows)</Description>
+        <Category>Warning</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="7">
+        <Description>Hyper-V Drivers missing on the VM</Description>
+        <Category>Warning</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="8">
+        <Description>SAN policy, Network config changes etc. in registry failed</Description>
+        <Category>Warning</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="9">
+        <Description>Failed to unmount partitions/cleanup registries load</Description>
+        <Category>Warning</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="10">
+        <Description>Reset Involt Parameters failed</Description>
+        <Category>Warning</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="11">
+        <Description>Setting Bootupscript failed</Description>
+        <Category>Warning</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="12">
+        <Description>Hydration Logs</Description>
+        <Category>Warning</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="13">
+        <Description>Http Metadata</Description>
+        <Category>Warning</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="16">
+        <Description>OS Drive for Windows in unexpected format or file not present</Description>
+        <Category>Error</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="17">
+        <Description>Mounting source System partitions failed</Description>
+        <Category>Warning</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="18">
+        <Description>Could not update bcd boot file in Windows</Description>
+        <Category>Warning</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="19">
+        <Description>Could not mark the partition active</Description>
+        <Category>Warning</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="20">
+        <Description>Could not fix FSTAB to use UUIDs</Description>
+        <Category>Warning</Category>
+        <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="21">
+        <Description>OS Unsupported</Description>
+        <Category>Error</Category>
+        <PossibleCause>The OS used by the replicated virtual machine is not supported by Azure SiteRecovery or Migrate.</PossibleCause>
+        <RecommendedAction>Please check the support matrix for Azure Site Recovery and Migrate. Contact support if you need further guidance.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="22">
+        <Description>HV Drivers Missing</Description>
+        <Category>Error</Category>
+        <PossibleCause>Hyper-V drivers are missing on the replicated virtual machine.</PossibleCause>
+        <RecommendedAction>Please check for all necessary Hyper-V drivers for azure vm and retry the operation.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="23">
+        <Description>Tools like dracut are missing and some hydration operations cannot be performed</Description>
+        <Category>Error</Category>
+       <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="24">
+        <Description>Grub Configuration File is missing</Description>
+        <Category>Error</Category>
+       <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+     <ErrorCode Number="25">
+        <Description>Guest Agent is already present on the VM hence there is no need to install it</Description>
+        <Category>Warning</Category>
+       <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Continue the process</RecommendedAction>
+    </ErrorCode>
+     <ErrorCode Number="26">
+        <Description>Guest Agent Installation Failed</Description>
+        <Category>Warning</Category>
+       <PossibleCause>Check the error details for more information.</PossibleCause>
+        <RecommendedAction>Retry the operation. If the issue persists, contact support.</RecommendedAction>
+    </ErrorCode>
+    <ErrorCode Number="27">
+        <Description>Image Regeneration using dracut failed</Description>
+        <Category>Error</Category>
+        <PossibleCause>Generating new initramfs kernel image with Hyper-V drivers failed. This can happen if a library dependency of dracut tool is unfulfilled or the image backup failed as system disk is running low on space.</PossibleCause>
+        <RecommendedAction>Please check whether dracut is correctly installed on source VM and there is enough space to allow backup operations.</RecommendedAction>
+    </ErrorCode>
+    
+</ErrorCodeDetailMapping>
