@@ -1,0 +1,81 @@
+﻿  building ..\boost_1_78_0 using b2.exe --layout=versioned --abbreviate-paths --user-config=win-user-config.jam --build-dir=./build/win/Win32 --stagedir=./stage/win/Win32 --with-system --with-thread --with-date_time --with-atomic --with-regex --with-serialization --with-filesystem --disable-icu --with-program_options --with-random architecture=x86  variant=debug link=static threading=multi runtime-link=static stage debug-symbols=on
+  Performing configuration checks
+  
+      - default address-model    : 64-bit (cached) [1]
+      - default architecture     : x86 (cached) [1]
+      - compiler supports SSE2   : yes (cached) [2]
+      - compiler supports SSE4.1 : yes (cached) [2]
+      - has synchronization.lib  : yes (cached) [2]
+      - has std::atomic_ref      : no  (cached) [2]
+      - has statx                : no  (cached) [2]
+      - has statx syscall        : no  (cached) [2]
+      - has BCrypt API           : yes (cached) [2]
+      - has init_priority attribute : no  (cached) [2]
+      - has stat::st_blksize     : no  (cached) [2]
+      - has stat::st_mtim        : no  (cached) [2]
+      - has stat::st_mtimensec   : no  (cached) [2]
+      - has stat::st_mtimespec   : no  (cached) [2]
+      - has stat::st_birthtim    : no  (cached) [2]
+      - has stat::st_birthtimensec : no  (cached) [2]
+      - has stat::st_birthtimespec : no  (cached) [2]
+      - has_icu builds           : no  (cached) [2]
+      - compiler supports SSE2   : yes (cached) [3]
+      - compiler supports SSE4.1 : yes (cached) [3]
+      - has synchronization.lib  : yes (cached) [3]
+      - has std::atomic_ref      : no  (cached) [3]
+      - has statx                : no  (cached) [3]
+      - has statx syscall        : no  (cached) [3]
+      - has BCrypt API           : yes (cached) [3]
+      - has init_priority attribute : no  (cached) [3]
+      - has stat::st_blksize     : no  (cached) [3]
+      - has stat::st_mtim        : no  (cached) [3]
+      - has stat::st_mtimensec   : no  (cached) [3]
+      - has stat::st_mtimespec   : no  (cached) [3]
+      - has stat::st_birthtim    : no  (cached) [3]
+      - has stat::st_birthtimensec : no  (cached) [3]
+      - has stat::st_birthtimespec : no  (cached) [3]
+      - has_icu builds           : no  (cached) [3]
+  
+  [1] msvc-14.2
+  [2] msvc-14.2/dbg/adrs-mdl-32/lnk-sttc/pythn-3.8/rntm-lnk-sttc/thrdp-wn32/thrd-mlt/vsblt-hdn
+  [3] msvc-14.2/dbg/lnk-sttc/pythn-3.8/rntm-lnk-sttc/thrdp-wn32/thrd-mlt/vsblt-hdn
+  
+  Component configuration:
+  
+      - atomic                   : building
+      - chrono                   : not building
+      - container                : not building
+      - context                  : not building
+      - contract                 : not building
+      - coroutine                : not building
+      - date_time                : building
+      - exception                : not building
+      - fiber                    : not building
+      - filesystem               : building
+      - graph                    : not building
+      - graph_parallel           : not building
+      - headers                  : not building
+      - iostreams                : not building
+      - json                     : not building
+      - locale                   : not building
+      - log                      : not building
+      - math                     : not building
+      - mpi                      : not building
+      - nowide                   : not building
+      - program_options          : building
+      - python                   : not building
+      - random                   : building
+      - regex                    : building
+      - serialization            : building
+      - stacktrace               : not building
+      - system                   : building
+      - test                     : not building
+      - thread                   : building
+      - timer                    : not building
+      - type_erasure             : not building
+      - wave                     : not building
+  
+  ...patience...
+  ...patience...
+  ...found 3577 targets...
+  

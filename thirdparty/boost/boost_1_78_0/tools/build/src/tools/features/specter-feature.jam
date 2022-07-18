@@ -1,0 +1,7 @@
+# TODO: Documentation.
+
+import feature ;
+
+feature.feature specter
+    : on off
+    : propagated ;
