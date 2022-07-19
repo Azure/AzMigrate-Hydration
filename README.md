@@ -1,3 +1,6 @@
+#Build Status
+[![Build Status](https://msazure.visualstudio.com/One/_apis/build/status/OneBranch/AzMigrate-Hydration/Azure.AzMigrate-Hydration?branchName=main)](https://msazure.visualstudio.com/One/_build/latest?definitionId=281865&branchName=main)
+
 # Project
 [Under Construction]: Currently only published zip is available for Public Usage, We are working towards making executable's OpenSource. 
 
