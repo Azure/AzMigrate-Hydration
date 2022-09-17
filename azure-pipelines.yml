@@ -8,6 +8,7 @@ trigger:
 - master
 - release
 - develop
+- users/shamish/*
 
 variables:
   REPOROOT: $(Build.SourcesDirectory)
@@ -66,6 +67,12 @@ stages:
             Copy-Item -Path $(REPOROOT)\host\AzureRecoveryUtil\Release\AzureRecoveryUtil.exe $(OUTPUTROOT)\
             Copy-Item -Path $(REPOROOT)\host\AzureRecoveryUtil\Release\AzureRecoveryUtil.pdb $(OUTPUTROOT)\
           workingDirectory: '$(REPOROOT)'
+
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: '$(OUTPUTROOT)'
+          ArtifactName: 'drop_build_windows_build'
+          publishLocation: 'Container'
 
       # Capture symbol files.
       - task: PowerShell@2
@@ -156,3 +163,72 @@ stages:
             cp -f $(REPOROOT)/host/AzureRecoveryUtilBuild.log $(Build.SourcesDirectory)/out/logs
           failOnStderr: true
 
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: '$(Build.SourcesDirectory)/out'
+          ArtifactName: 'drop_build_linux_build'
+          publishLocation: 'Container'
+
+  # Packaging job
+  - job: packaging
+    dependsOn:
+      - windows_build
+      - linux_build
+    pool:
+      vmImage: windows-latest
+      type: windows
+
+    steps:
+    # Download Windows build artifacts.
+    - task: DownloadPipelineArtifact@2
+      displayName: 'Download Windows Build Artifacts'
+      inputs:
+        path: $(Build.StagingDirectory)
+        artifact: drop_build_windows_build
+
+    # Download Windows build artifacts.
+    - task: DownloadPipelineArtifact@2
+      displayName: 'Download Linux Build Artifacts'
+      inputs:
+        path: $(Build.StagingDirectory)
+        artifact: drop_build_linux_build
+
+    # Copy AzureRecoveryTools related files.
+    - task: CopyFiles@2
+      displayName: 'Copy AzureRecoveryTools Related Files'
+      inputs:
+        SourceFolder: $(Build.StagingDirectory)
+        Contents: |
+          **/*
+          !**/StartupScript.sh
+          !**/*.dbg
+          !**/*.pdb
+          !logs/**/*
+          !**/build.manifest*
+          !**/*.cvrp
+          !cvdata/**/*
+        TargetFolder: $(Build.StagingDirectory)\AzureRecoveryTools
+
+    # Create AzureRecoveryTools.zip
+    - task: ArchiveFiles@2
+      displayName: 'Create AzureRecoveryTools.zip'
+      inputs:
+        rootFolderOrFile: $(Build.StagingDirectory)\AzureRecoveryTools
+        archiveFile: out\AzureRecoveryTools.zip
+        includeRootFolder: false
+
+    - task: GitHubRelease@1
+      inputs:
+        gitHubConnection: 'Prot2Hydration-Github-Connection'
+        repositoryName: 'Azure/AzMigrate-Hydration'
+        action: 'create'
+        target: '$(Build.SourceVersion)'
+        tagSource: 'gitTag'
+        tagPattern: 'v*.*.*'
+        title: 'AzureRecoveryUtil'
+        releaseNotesSource: 'inline'
+        releaseNotesInline: 'AzureRecoveryUtil Initial Build'
+        assets: '$(Build.StagingDirectory)\out\AzureRecoveryTools.zip'
+        isPreRelease: true
+        changeLogCompareToRelease: 'lastFullRelease'
+        changeLogType: 'commitBased'
