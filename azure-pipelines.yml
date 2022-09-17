@@ -214,7 +214,7 @@ stages:
       displayName: 'Create AzureRecoveryTools.zip'
       inputs:
         rootFolderOrFile: $(Build.StagingDirectory)\AzureRecoveryTools
-        archiveFile: out\AzureRecoveryTools.zip
+        archiveFile: $(Build.StagingDirectory)\AzureRecoveryTools.zip
         includeRootFolder: false
 
     - task: GitHubRelease@1
@@ -228,7 +228,7 @@ stages:
         title: 'AzureRecoveryUtil'
         releaseNotesSource: 'inline'
         releaseNotesInline: 'AzureRecoveryUtil Initial Build'
-        assets: '$(Build.StagingDirectory)\out\AzureRecoveryTools.zip'
+        assets: '$(Build.StagingDirectory)\AzureRecoveryTools.zip'
         isPreRelease: true
         changeLogCompareToRelease: 'lastFullRelease'
         changeLogType: 'commitBased'
