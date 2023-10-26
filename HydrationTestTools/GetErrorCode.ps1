@@ -1,1 +1,0 @@
-type "C:\AzureRecovery\ErrorCode.log"
