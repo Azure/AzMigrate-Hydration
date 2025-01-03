@@ -262,14 +262,14 @@ stages:
         gitHubConnection: 'Prot2Hydration-Github-Connection'
         repositoryName: 'thedarksage/AzMigrate-Hydration'
         action: 'create'
-        target: '$(Build.SourceVersion)'
+        target: '$(Build.SourceVersion)'  # Use the latest commit
         tagSource: 'gitTag'
-        tagPattern: 'v*.*.*'
+        tag: 'vtest.0.0'  # Specify your own tag
         title: 'AzureRecoveryUtil'
         releaseNotesSource: 'inline'
         releaseNotesInline: 'AzureRecoveryUtil Initial Build'
         assets: '$(Build.StagingDirectory)\out\AzureRecoveryTools.zip'
-        isPreRelease: true
+        isPreRelease: false
         changeLogCompareToRelease: 'lastFullRelease'
         changeLogType: 'commitBased'
 
