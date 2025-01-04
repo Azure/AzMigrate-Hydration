@@ -263,7 +263,7 @@ stages:
         repositoryName: 'thedarksage/AzMigrate-Hydration'
         action: 'create'
         target: '$(Build.SourceVersion)'  # Use the latest commit
-        tagSource: 'gitTag'
+        tagSource: 'userSpecifiedTag'
         tag: 'vtest.0.0'  # Specify your own tag
         title: 'AzureRecoveryUtil'
         releaseNotesSource: 'inline'
