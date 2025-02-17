@@ -24,5 +24,3 @@ As described in the [MIT license](LICENSE.txt), these scripts are provided as-is
 
 # Provide Feedback
 We value your input. If you encounter problems with the scripts or ideas on how they can be improved please file an issue in the [Issues](https://github.com/Azure/azure-support-scripts/issues) section of the project.
-
-# Known Issues
