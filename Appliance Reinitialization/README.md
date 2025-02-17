@@ -2,16 +2,16 @@
 
 The Azure Migrate VMware Agentless Migration service (https://learn.microsoft.com/en-us/azure/migrate/vmware/tutorial-migrate-vmware) released support in 2023 for a simplified appliance infrastructure that no longer depends on **KeyVault, ServiceBus,** and **EventHub** artifacts. This newer infrastructure provides a streamlined experience for customer onboarding and enhanced security as we continue to invest in modernizing our platform.
 
-## Important Timelines for Customers Using the Legacy-Infrastructure based Appliance
+## Migration Steps for Customers Using the Legacy-Infrastructure based Appliance
 
-- **By March 15, 2025:**  
+- **Complete/Disable existing replications:**  
   Complete the migration of any already enabled virtual machines or disable the existing replications.
   
-- **After March 15, 2025:**  
+- **Re-initialize Replication Appliance:**  
   You can either retire the older appliance and register a new one in your migration projects for new servers or use the provided script to clean up and reinitialize your current appliances for the new infrastructure.
   
-- **Starting from March 31, 2025:**  
-  Migrations from appliances that haven’t been reinitialized will no longer be supported.
+- **Stop using legacy appliances for new VMs:**  
+  In case you have legacy appliances lying around, do not enable migrations from appliances that haven’t been reinitialized. Instead use the modernized appliances that have been newly set up from scratch or re-initialized using the script to enable new migrations.
 
 If you have any questions or need assistance, please reach out to Microsoft Support at your earliest convenience.
 
