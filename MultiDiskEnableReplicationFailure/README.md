@@ -4,21 +4,24 @@ Due to a recent code change, we have observed enable replication failures on som
 This can occur in the race condition where initial resync of 2 or more disks reach the service at the exact same time, causing a parallel update to a backend entity.
 While a retry should generally allow the replication to go through, for VMs which contain very high numnber of disks, we recommend customers to enable protection on the VM, and replicate the data disks once the VM is in protected state to reduce chances of the race condition. ASR is in progress of validating the fix and will share the status of deployment as per table below.
 
+Please run the MultiDiskEnableReplicationFix.ps1 to add disks to an already protected VM.
 
-| Region               | Deployment Status          |
-|----------------------|----------------------------|
+### Deployment status for the service side fix.
+
+| Region               | Deployment Status     |
+|----------------------|------------------------|
 | Australia Central    | Not Completed              |
 | Australia Central 2  | Not Completed              |
 | Australia East       | Not Completed              |
 | Australia Southeast  | Not Completed              |
-| Austria East         | Not Completed              |
+| Austria East         | Not Completed           |
 | Brazil South         | Not Completed              |
 | Brazil Southeast     | Not Completed              |
 | Canada Central       | Not Completed              |
 | Canada East          | Not Completed              |
 | Central India        | Not Completed              |
 | Central US           | Not Completed              |
-| Chile Central        | Not Completed              |
+| Chile Central        | Not Completed           |
 | East Asia            | Not Completed              |
 | East US              | Not Completed              |
 | East US 2            | Not Completed              |
@@ -26,28 +29,28 @@ While a retry should generally allow the replication to go through, for VMs whic
 | France South         | Not Completed              |
 | Germany North        | Not Completed              |
 | Germany West Central | Not Completed              |
-| Indonesia Central    | Not Completed              |
-| Israel Central       | Not Completed              |
-| Italy North          | Not Completed              |
+| Indonesia Central    | Not Completed           |
+| Israel Central       | Not Completed           |
+| Italy North          | Not Completed           |
 | Japan East           | Not Completed              |
 | Japan West           | Not Completed              |
 | Korea Central        | Not Completed              |
 | Korea South          | Not Completed              |
-| Malaysia West        | Not Completed              |
-| Mexico Central       | Not Completed              |
-| New Zealand North    | Not Completed              |
+| Malaysia West        | Not Completed           |
+| Mexico Central       | Not Completed           |
+| New Zealand North    | Not Completed           |
 | North Central US     | Not Completed              |
 | North Europe         | Not Completed              |
 | Norway East          | Not Completed              |
 | Norway West          | Not Completed              |
-| Poland Central       | Not Completed              |
-| Qatar Central        | Not Completed              |
+| Poland Central       | Not Completed           |
+| Qatar Central        | Not Completed           |
 | South Africa North   | Not Completed              |
 | South Africa West    | Not Completed              |
 | South Central US     | Not Completed              |
 | South India          | Not Completed              |
 | Southeast Asia       | Not Completed              |
-| Spain Central        | Not Completed              |
+| Spain Central        | Not Completed           |
 | Sweden Central       | Not Completed              |
 | Sweden South         | Not Completed              |
 | Switzerland North    | Not Completed              |
@@ -55,4 +58,11 @@ While a retry should generally allow the replication to go through, for VMs whic
 | UAE Central          | Not Completed              |
 | UAE North            | Not Completed              |
 | UK South             | Not Completed              |
+| UK West              | Not Completed              |
+| West Central US      | Not Completed              |
+| West Europe          | Not Completed              |
+| West India           | Not Completed              |
+| West US              | Not Completed              |
+| West US 2            | Not Completed              |
+| West US 3            | Not Completed              |
 
