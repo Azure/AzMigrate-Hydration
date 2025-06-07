@@ -1,10 +1,12 @@
 ### Enable Replication/Reprotect Failures for VMs with multiple disks
 
 Due to a recent code change, we have observed enable replication failures on some replication jobs which attempted to protect high number of disks at once.
-This can occur in the race condition where initial resync of 2 or more disks reach the service at the exact same time, causing a parallel update to a backend entity.
-While a retry should generally allow the replication to go through, for VMs which contain very high numnber of disks, we recommend customers to enable protection on the VM, and replicate the data disks once the VM is in protected state to reduce chances of the race condition. ASR is in progress of validating the fix and will share the status of deployment as per table below.
+This can occur in the race condition where initial resync of 2 or more disks reach the service concurrently, causing a parallel update to a backend entity.
+While a retry should sinficantly reduces the likelihood of race condition, for VMs which contain very high numnber of disks, we recommend customers to enable protection on the VM, and replicate the data disks once the VM is in protected state to reduce chances of the race condition. Since the failure is immediate, retrying the job after few minutes is the favoured mitigation to resolve this issue.
 
-Please run the MultiDiskEnableReplicationFix.ps1 to add disks to an already protected VM.
+Please run the MultiDiskEnableReplicationFix.ps1 to add disks to an already protected VM, if  the issue reoccurs in retry. The script resolves the race condition by calling replication on the disks in a sequential manner.
+
+#### Update (7th June, 2025): Azure Site Recovery has started the rollout of the fix.
 
 ### Deployment status for the service side fix.
 
