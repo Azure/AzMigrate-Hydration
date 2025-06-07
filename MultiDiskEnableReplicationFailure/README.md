@@ -14,7 +14,7 @@ Please run the MultiDiskEnableReplicationFix.ps1 to add disks to an already prot
 | Australia Central 2  | Not Completed              |
 | Australia East       | Not Completed              |
 | Australia Southeast  | Not Completed              |
-| Austria East         | Not Completed           |
+| Austria East         | Not Completed              |
 | Brazil South         | Not Completed              |
 | Brazil Southeast     | Not Completed              |
 | Canada Central       | Not Completed              |
@@ -22,7 +22,7 @@ Please run the MultiDiskEnableReplicationFix.ps1 to add disks to an already prot
 | Central India        | Not Completed              |
 | Central US           | Not Completed              |
 | Chile Central        | Not Completed           |
-| East Asia            | Not Completed              |
+| East Asia            | :heavy_check_mark: 7th June, 2025             |
 | East US              | Not Completed              |
 | East US 2            | Not Completed              |
 | France Central       | Not Completed              |
