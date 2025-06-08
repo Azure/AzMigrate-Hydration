@@ -51,7 +51,7 @@ Please run the MultiDiskEnableReplicationFix.ps1 to add disks to an already prot
 | South Africa West    | Not Completed              |
 | South Central US     | Not Completed              |
 | South India          | Not Completed              |
-| Southeast Asia       | Not Completed              |
+| Southeast Asia       | :heavy_check_mark: 8th June, 2025              |
 | Spain Central        | Not Completed           |
 | Sweden Central       | Not Completed              |
 | Sweden South         | Not Completed              |
