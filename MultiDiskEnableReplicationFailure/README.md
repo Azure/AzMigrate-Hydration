@@ -12,59 +12,59 @@ Please run the MultiDiskEnableReplicationFix.ps1 to add disks to an already prot
 
 | Region               | Deployment Status     |
 |----------------------|------------------------|
-| Australia Central    | Not Completed              |
-| Australia Central 2  | Not Completed              |
-| Australia East       | Not Completed              |
-| Australia Southeast  | Not Completed              |
-| Austria East         | Not Completed              |
-| Brazil South         | Not Completed              |
-| Brazil Southeast     | Not Completed              |
-| Canada Central       | Not Completed              |
-| Canada East          | Not Completed              |
-| Central India        | Not Completed              |
-| Central US           | Not Completed              |
-| Chile Central        | Not Completed           |
+| Australia Central    | :white_check_mark: Completed              |
+| Australia Central 2  | :white_check_mark: Completed              |
+| Australia East       | :white_check_mark: Completed              |
+| Australia Southeast  | :white_check_mark: Completed              |
+| Austria East         | :white_check_mark: Completed              |
+| Brazil South         | :white_check_mark: Completed              |
+| Brazil Southeast     | :white_check_mark: Completed              |
+| Canada Central       | :white_check_mark: Completed              |
+| Canada East          | :white_check_mark: Completed              |
+| Central India        | :white_check_mark: Completed              |
+| Central US           | :white_check_mark: Completed              |
+| Chile Central        | :white_check_mark: Completed           |
 | East Asia            | :white_check_mark: Completed            |
-| East US              | Not Completed              |
-| East US 2            | Not Completed              |
-| France Central       | Not Completed              |
-| France South         | Not Completed              |
-| Germany North        | Not Completed              |
-| Germany West Central | Not Completed              |
-| Indonesia Central    | Not Completed           |
-| Israel Central       | Not Completed           |
-| Italy North          | Not Completed           |
-| Japan East           | Not Completed              |
-| Japan West           | Not Completed              |
-| Korea Central        | Not Completed              |
-| Korea South          | Not Completed              |
-| Malaysia West        | Not Completed           |
-| Mexico Central       | Not Completed           |
-| New Zealand North    | Not Completed           |
-| North Central US     | Not Completed              |
+| East US              | :white_check_mark: Completed              |
+| East US 2            | :white_check_mark: Completed              |
+| France Central       | :white_check_mark: Completed              |
+| France South         | :white_check_mark: Completed              |
+| Germany North        | :white_check_mark: Completed              |
+| Germany West Central | :white_check_mark: Completed              |
+| Indonesia Central    | :white_check_mark: Completed           |
+| Israel Central       | :white_check_mark: Completed           |
+| Italy North          | :white_check_mark: Completed           |
+| Japan East           | :white_check_mark: Completed              |
+| Japan West           | :white_check_mark: Completed              |
+| Korea Central        | :white_check_mark: Completed              |
+| Korea South          | :white_check_mark: Completed              |
+| Malaysia West        | :white_check_mark: Completed           |
+| Mexico Central       | :white_check_mark: Completed           |
+| New Zealand North    | :white_check_mark: Completed           |
+| North Central US     | :white_check_mark: Completed              |
 | North Europe         | :white_check_mark: Completed             |
-| Norway East          | Not Completed              |
-| Norway West          | Not Completed              |
-| Poland Central       | Not Completed           |
-| Qatar Central        | Not Completed           |
-| South Africa North   | Not Completed              |
-| South Africa West    | Not Completed              |
-| South Central US     | Not Completed              |
-| South India          | Not Completed              |
+| Norway East          | :white_check_mark: Completed              |
+| Norway West          | :white_check_mark: Completed              |
+| Poland Central       | :white_check_mark: Completed           |
+| Qatar Central        | :white_check_mark: Completed           |
+| South Africa North   | :white_check_mark: Completed              |
+| South Africa West    | :white_check_mark: Completed              |
+| South Central US     | :white_check_mark: Completed              |
+| South India          | :white_check_mark: Completed              |
 | Southeast Asia       | :white_check_mark: Completed             |
-| Spain Central        | Not Completed           |
-| Sweden Central       | Not Completed              |
-| Sweden South         | Not Completed              |
-| Switzerland North    | Not Completed              |
-| Switzerland West     | Not Completed              |
-| UAE Central          | Not Completed              |
-| UAE North            | Not Completed              |
-| UK South             | Not Completed              |
-| UK West              | Not Completed              |
-| West Central US      | Not Completed              |
-| West Europe          | Not Completed              |
-| West India           | Not Completed              |
-| West US              | Not Completed              |
-| West US 2            | Not Completed              |
-| West US 3            | Not Completed              |
+| Spain Central        | :white_check_mark: Completed           |
+| Sweden Central       | :white_check_mark: Completed              |
+| Sweden South         | :white_check_mark: Completed              |
+| Switzerland North    | :white_check_mark: Completed              |
+| Switzerland West     | :white_check_mark: Completed              |
+| UAE Central          | :white_check_mark: Completed              |
+| UAE North            | :white_check_mark: Completed              |
+| UK South             | :white_check_mark: Completed              |
+| UK West              | :white_check_mark: Completed              |
+| West Central US      | :white_check_mark: Completed              |
+| West Europe          | :white_check_mark: Completed              |
+| West India           | :white_check_mark: Completed              |
+| West US              | :white_check_mark: Completed              |
+| West US 2            | :white_check_mark: Completed              |
+| West US 3            | :white_check_mark: Completed              |
 
