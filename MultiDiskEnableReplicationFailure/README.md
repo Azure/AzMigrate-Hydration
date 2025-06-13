@@ -7,6 +7,7 @@ While a retry should sinficantly reduces the likelihood of race condition, for V
 Please run the MultiDiskEnableReplicationFix.ps1 to add disks to an already protected VM, if  the issue reoccurs in retry. The script resolves the race condition by calling replication on the disks in a sequential manner.
 
 #### Update (7th June, 2025): Azure Site Recovery has started the rollout of the fix.
+#### Update (12th June, 2025): :white_check_mark: Azure Site Recovery has completed the rollout of the fix in all the public regions.
 
 ### Deployment status for the service side fix.
 
