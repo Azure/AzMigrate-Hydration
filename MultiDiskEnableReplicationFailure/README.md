@@ -7,65 +7,74 @@ While a retry should sinficantly reduces the likelihood of race condition, for V
 Please run the MultiDiskEnableReplicationFix.ps1 to add disks to an already protected VM, if  the issue reoccurs in retry. The script resolves the race condition by calling replication on the disks in a sequential manner.
 
 #### Update (7th June, 2025): Azure Site Recovery has started the rollout of the fix.
-#### Update (12th June, 2025): :white_check_mark: Azure Site Recovery has completed the rollout of the fix in all the public regions.
+#### Update (13th June, 2025): :white_check_mark: Azure Site Recovery has completed the rollout of the fix in all the public regions.
 
 ### Deployment status for the service side fix.
 
 | Region               | Deployment Status     |
 |----------------------|------------------------|
-| Australia Central    | :white_check_mark: Completed              |
-| Australia Central 2  | :white_check_mark: Completed              |
-| Australia East       | :white_check_mark: Completed              |
-| Australia Southeast  | :white_check_mark: Completed              |
-| Austria East         | :white_check_mark: Completed              |
-| Brazil South         | :white_check_mark: Completed              |
-| Brazil Southeast     | :white_check_mark: Completed              |
-| Canada Central       | :white_check_mark: Completed              |
-| Canada East          | :white_check_mark: Completed              |
-| Central India        | :white_check_mark: Completed              |
-| Central US           | :white_check_mark: Completed              |
-| Chile Central        | :white_check_mark: Completed           |
-| East Asia            | :white_check_mark: Completed            |
-| East US              | :white_check_mark: Completed              |
-| East US 2            | :white_check_mark: Completed              |
-| France Central       | :white_check_mark: Completed              |
-| France South         | :white_check_mark: Completed              |
-| Germany North        | :white_check_mark: Completed              |
-| Germany West Central | :white_check_mark: Completed              |
-| Indonesia Central    | :white_check_mark: Completed           |
-| Israel Central       | :white_check_mark: Completed           |
-| Italy North          | :white_check_mark: Completed           |
-| Japan East           | :white_check_mark: Completed              |
-| Japan West           | :white_check_mark: Completed              |
-| Korea Central        | :white_check_mark: Completed              |
-| Korea South          | :white_check_mark: Completed              |
-| Malaysia West        | :white_check_mark: Completed           |
-| Mexico Central       | :white_check_mark: Completed           |
-| New Zealand North    | :white_check_mark: Completed           |
-| North Central US     | :white_check_mark: Completed              |
-| North Europe         | :white_check_mark: Completed             |
-| Norway East          | :white_check_mark: Completed              |
-| Norway West          | :white_check_mark: Completed              |
-| Poland Central       | :white_check_mark: Completed           |
-| Qatar Central        | :white_check_mark: Completed           |
-| South Africa North   | :white_check_mark: Completed              |
-| South Africa West    | :white_check_mark: Completed              |
-| South Central US     | :white_check_mark: Completed              |
-| South India          | :white_check_mark: Completed              |
-| Southeast Asia       | :white_check_mark: Completed             |
-| Spain Central        | :white_check_mark: Completed           |
-| Sweden Central       | :white_check_mark: Completed              |
-| Sweden South         | :white_check_mark: Completed              |
-| Switzerland North    | :white_check_mark: Completed              |
-| Switzerland West     | :white_check_mark: Completed              |
-| UAE Central          | :white_check_mark: Completed              |
-| UAE North            | :white_check_mark: Completed              |
-| UK South             | :white_check_mark: Completed              |
-| UK West              | :white_check_mark: Completed              |
-| West Central US      | :white_check_mark: Completed              |
-| West Europe          | :white_check_mark: Completed              |
-| West India           | :white_check_mark: Completed              |
-| West US              | :white_check_mark: Completed              |
-| West US 2            | :white_check_mark: Completed              |
-| West US 3            | :white_check_mark: Completed              |
+| Australia Central    | :white_check_mark: Completed (10th June, 2025)                 |
+| Australia Central 2  | :white_check_mark: Completed (10th June, 2025)                 |
+| Australia East       | :white_check_mark: Completed (10th June, 2025)             |
+| Australia Southeast  | :white_check_mark: Completed (10th June, 2025)                |
+| Austria East         | :white_check_mark: Completed (13th June, 2025)              |
+| Brazil South         | :white_check_mark: Completed (10th June, 2025)                  |
+| Brazil Southeast     | :white_check_mark: Completed (11th June, 2025)                |
+| Canada Central       | :white_check_mark: Completed (10th June, 2025)              |
+| Canada East          | :white_check_mark: Completed (10th June, 2025)          |
+| Central India        | :white_check_mark: Completed (10th June, 2025)                |
+| Central US           | :white_check_mark: Completed (11th June, 2025)                |
+| Chile Central        | :white_check_mark: Completed (13th June, 2025)             |
+| East Asia            | :white_check_mark: Completed (7th June, 2025)            |
+| East US              | :white_check_mark: Completed (13th June, 2025)                |
+| East US 2            | :white_check_mark: Completed (13th June, 2025)                |
+| France Central       | :white_check_mark: Completed (10th June, 2025)                  |
+| France South         | :white_check_mark: Completed (10th June, 2025)                |
+| Germany North        | :white_check_mark: Completed (10th June, 2025)                |
+| Germany West Central | :white_check_mark: Completed (10th June, 2025)                  |
+| Indonesia Central    | :white_check_mark: Completed (13th June, 2025)             |
+| Israel North       | :white_check_mark: Completed (13th June, 2025)            |
+| Israel Central       | :white_check_mark: Completed (13th June, 2025)            |
+| Italy North          | :white_check_mark: Completed (13th June, 2025)          |
+| Japan East           | :white_check_mark: Completed (10th June, 2025)                 |
+| Japan West           | :white_check_mark: Completed (10th June, 2025)                |
+| Jio India Central         | :white_check_mark: Completed (11th June, 2025)              |
+| Jio India West           | :white_check_mark: Completed (11th June, 2025)                |
+| Korea Central        | :white_check_mark: Completed (10th June, 2025)            |
+| Korea South          | :white_check_mark: Completed (10th June, 2025)             |
+| Malaysia South        | :white_check_mark: Completed (11th June, 2025)             |
+| Malaysia West        | :white_check_mark: Completed (13th June, 2025)           |
+| Mexico Central       | :white_check_mark: Completed (13th June, 2025)         |
+| New Zealand North    | :white_check_mark: Completed (11th June, 2025)             |
+| North Central US     | :white_check_mark: Completed (10th June, 2025)                 |
+| North Europe         | :white_check_mark: Completed (9th June, 2025)             |
+| Norway East          | :white_check_mark: Completed (10th June, 2025)                |
+| Norway West          | :white_check_mark: Completed (10th June, 2025)                |
+| Poland Central       | :white_check_mark: Completed (11th June, 2025)             |
+| Qatar Central        | :white_check_mark: Completed (13th June, 2025)             |
+| South Africa North   | :white_check_mark: Completed (10th June, 2025)                  |
+| South Africa West    | :white_check_mark: Completed (10th June, 2025)                  |
+| South Central US     | :white_check_mark: Completed (10th June, 2025)               |
+| South India          | :white_check_mark: Completed (10th June, 2025)   |
+| Southeast Asia       | :white_check_mark: Completed (8th June, 2025)            |
+| Spain Central        | :white_check_mark: Completed (13th June, 2025)           |
+| Sweden Central       | :white_check_mark: Completed (11th June, 2025)                |
+| Sweden South         | :white_check_mark: Completed (11th June, 2025)                 |
+| Switzerland North    | :white_check_mark: Completed (10th June, 2025)                  |
+| Switzerland West     | :white_check_mark: Completed (10th June, 2025)                 |
+| Taiwan West     | :white_check_mark: Completed (13th June, 2025)              |
+| Taiwan North West     | :white_check_mark: Completed (13th June, 2025)           |
+| UAE Central          | :white_check_mark: Completed (10th June, 2025)                  |
+| UAE North            | :white_check_mark: Completed (10th June, 2025)                |
+| UK South             | :white_check_mark: Completed (11th June, 2025)                 |
+| UK West              | :white_check_mark: Completed (10th June, 2025)                 |
+| US Central 2            | :white_check_mark: Completed (13th June, 2025)             |
+| US SouthEast  |:white_check_mark: Completed (13th June, 2025)           |
+| US SouthEast 3             | :white_check_mark: Completed (13th June, 2025)                |
+| West Central US      | :white_check_mark: Completed (11th June, 2025)                 |
+| West Europe          | :white_check_mark: Completed (10th June, 2025)                 |
+| West India           | :white_check_mark: Completed (10th June, 2025)                 |
+| West US              | :white_check_mark: Completed (11th June, 2025)                |
+| West US 2            | :white_check_mark: Completed (11th June, 2025)                |
+| West US 3            | :white_check_mark: Completed (10th June, 2025)                 |
 
