@@ -1216,7 +1216,7 @@ check_boot_partition_mounted()
 
 check_rootfs_is_supported()
 {
-    LOG "Check if the root filesysytem is supported"
+    LOG "Check if the root filesystem is supported"
 
     SetOP "CheckIsRootFsSupported"
     filesystems=`echo ${Params[${IDX}]} | ${JQ} '.SupportedFileSystems' | awk -F"\"" '{print $2}'`
@@ -1264,10 +1264,10 @@ check_dirs_writable()
 }
 
 
-# Check if the boot filesysytem is supported
+# Check if the boot filesystem is supported
 check_bootfs_is_supported()
 {
-    LOG "Check if the boot filesysytem is supported"
+    LOG "Check if the boot filesystem is supported"
 
     SetOP "CheckIsBootFsSupported"
     if [ ${NR_BOOTABLE_DISKS} -ne "1" ]; then
