@@ -1,0 +1,12 @@
+{
+    "vmResourceIds": [
+        "/subscriptions/4Bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/akgurg/providers/Microsoft.Compute/virtualMachines/vm17"
+    ],
+    "deleteNics": "false",
+    "deleteVMs": "false",
+    "targetDiskRG": "akgurg",
+    "targetDiskSub": "4Bd2aa0f-2bd2-4d67-91a8-5a4533d58600",
+    "persistOSDisk": "true",
+    "confirmBeforeProceeding": "true",
+    "enableTelemetry": "true"
+}
