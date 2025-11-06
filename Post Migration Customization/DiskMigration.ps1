@@ -488,6 +488,110 @@ function Delete-NICs {
     }
 }
 
+# Function to generate disk-config.json for IaaS VM IAC template using actual target disks
+function Generate-DiskConfigJson {
+    param(
+        [string]$vmName,
+        [string]$targetDiskRG,
+        [string]$targetDiskSub,
+        [string]$outputDir,
+        [array]$targetDiskNames,
+        [hashtable]$originalDiskInfo
+    )
+    
+    $diskConfigPath = Join-Path -Path $outputDir -ChildPath "disk-config.json"
+    $diskConfigs = @()
+    
+    # Read existing disk config if it exists
+    if (Test-Path $diskConfigPath) {
+        try {
+            $existingConfig = Get-Content -Path $diskConfigPath -Raw | ConvertFrom-Json
+            if ($existingConfig.disks) {
+                $diskConfigs = @($existingConfig.disks)
+            }
+        } catch {
+            Write-Warning "Could not read existing disk-config.json, starting fresh: $_"
+        }
+    }
+    
+    # Switch to target subscription context if different
+    $currentContext = Get-AzContext
+    if ($targetDiskSub -and $targetDiskSub -ne $currentContext.Subscription.Id.ToLower()) {
+        Set-AzContext -SubscriptionId $targetDiskSub -ErrorAction SilentlyContinue
+    }
+    
+    # Process each target disk name
+    foreach ($diskName in $targetDiskNames) {
+        try {
+            # Get actual disk details from target location
+            $targetDisk = Get-AzDisk -ResourceGroupName $targetDiskRG -DiskName $diskName -ErrorAction Stop
+            
+            # Get original disk info for this disk
+            $originalInfo = $originalDiskInfo[$diskName]
+            if (-not $originalInfo) {
+                Write-Warning "No original disk info found for $diskName, using defaults"
+                $originalInfo = @{
+                    Purpose = "data-disk"
+                    OriginalLun = 0
+                    Caching = "ReadWrite"
+                }
+            }
+            
+            # Convert caching value to string if it's numeric
+            $cachingValue = if ($originalInfo.Caching) { 
+                switch ($originalInfo.Caching.ToString()) {
+                    "0" { "None" }
+                    "1" { "ReadOnly" }
+                    "2" { "ReadWrite" }
+                    default { $originalInfo.Caching.ToString() }
+                }
+            } else { "ReadWrite" }
+            
+            $diskConfig = [ordered]@{
+                vm_name = $originalInfo.SourceVMName
+                name = $targetDisk.Name
+                size_gb = $targetDisk.DiskSizeGB
+                type = $targetDisk.Sku.Name
+                caching = $cachingValue
+                lun = $originalInfo.OriginalLun
+                tags = [ordered]@{
+                    purpose = $originalInfo.Purpose
+                    migrated = "true"
+                    source_vm = $originalInfo.SourceVMName
+                    original_lun = $originalInfo.OriginalLun
+                }
+            }
+            $diskConfigs += $diskConfig
+            
+        } catch {
+            Write-Warning "Could not process target disk $diskName : $_"
+        }
+    }
+    
+    # Create the final disk configuration object
+    $diskConfigObject = [ordered]@{
+        disks = $diskConfigs
+    }
+    
+    # Convert to JSON with compressed format first, then format properly
+    $jsonCompressed = $diskConfigObject | ConvertTo-Json -Depth 4 -Compress
+    $jsonObject = $jsonCompressed | ConvertFrom-Json
+    
+    # Re-convert with proper formatting
+    $jsonContent = $jsonObject | ConvertTo-Json -Depth 4
+    
+    # Write UTF-8 without BOM using .NET method
+    # $jsonContent | Out-File -FilePath $diskConfigPath -Encoding utf8
+    [System.IO.File]::WriteAllText($diskConfigPath, $jsonContent, [System.Text.UTF8Encoding]::new($false))
+
+    Write-Host "Disk configuration JSON updated at: $diskConfigPath" -ForegroundColor Green
+    Send-Telemetry -EventName "DiskConfigGenerated" -Properties @{
+        FilePath = $diskConfigPath
+        DiskCount = $diskConfigs.Count
+        VM = $vmName
+    }
+}
+
 # Modular function to process VM disks
 function Process-VMDisks {
     param(
@@ -509,6 +613,46 @@ function Process-VMDisks {
     }
 }
 
+# Function to collect disk information for disk-config.json generation
+function Collect-DiskInfo {
+    param(
+        [object]$vmDetails,
+        [string]$vmName,
+        [bool]$persistOSDisk
+    )
+    
+    $diskInfo = @{}
+    
+    # Collect OS Disk info if persisted
+    if ($persistOSDisk -and $vmDetails.StorageProfile.OsDisk) {
+        $osDisk = $vmDetails.StorageProfile.OsDisk
+        $osDiskName = (Get-AzResource -ResourceId $osDisk.ManagedDisk.Id).Name
+        
+        $diskInfo[$osDiskName] = @{
+            Purpose = "os-disk"
+            OriginalLun = 0
+            Caching = $osDisk.Caching
+            SourceVMName = $vmName
+        }
+    }
+    
+    # Collect Data Disks info
+    if ($vmDetails.StorageProfile.DataDisks) {
+        foreach ($dataDisk in $vmDetails.StorageProfile.DataDisks) {
+            $dataDiskName = (Get-AzResource -ResourceId $dataDisk.ManagedDisk.Id).Name
+            
+            $diskInfo[$dataDiskName] = @{
+                Purpose = "data-disk"
+                OriginalLun = $dataDisk.Lun
+                Caching = $dataDisk.Caching
+                SourceVMName = $vmName
+            }
+        }
+    }
+    
+    return $diskInfo
+}
+
 # Modular function to process each VM
 function Process-VM {
     param(
@@ -520,7 +664,8 @@ function Process-VM {
         [bool]$deleteVMs,
         [string]$persistOSDisk,
         [string]$targetDiskRG,
-        [string]$targetDiskSub
+        [string]$targetDiskSub,
+        [bool]$generateIaasVmIacTemplateDiskConfig
     )
 
     try {
@@ -536,10 +681,25 @@ function Process-VM {
         Wait-For-ActiveDeployments -resourceGroupName $vmRG -deploymentTypes @("vm_deploy", "CreateVm") -timeoutMinutes 30
 
         $vmDetails = Get-AzVM -ResourceGroupName $vmRG -Name $vmName -ErrorAction Stop
+        
+        # Collect disk information before processing (for later disk-config generation)
+        $originalDiskInfo = @{}
+        if ($generateIaasVmIacTemplateDiskConfig) {
+            $originalDiskInfo = Collect-DiskInfo -vmDetails $vmDetails -vmName $vmName -persistOSDisk ($persistOSDisk -eq "true")
+        }
+        
         $iacSnippet = Process-VMDisks -vmDetails $vmDetails -vmName $vmName -vmId $vmId -vmRG $vmRG -persistOSDisk $persistOSDisk -targetDiskRG $targetDiskRG -targetDiskSub $targetDiskSub -sourceSubscriptionId $sourceSubscriptionId -deleteVMs $deleteVMs
 
-        $iacSnippet | Out-File -FilePath "$outputDir\$vmName.tf" -Encoding utf8
+        $terraformFilePath = Join-Path -Path $outputDir -ChildPath "$vmName.tf"
+        $iacSnippet | Out-File -FilePath $terraformFilePath -Encoding utf8
         Write-Host "IAC snippet generated for disks of VM: $vmName" -ForegroundColor Green
+
+        # Store disk info for later disk-config generation (return it from this function)
+        return @{
+            Success = $true
+            VMName = $vmName
+            OriginalDiskInfo = $originalDiskInfo
+        }
 
         if ($deleteNics -and $deleteVMs -and $vmNicInfo.ContainsKey($vmId)) {
             Write-Host "Deleting NICs for VM: $vmName ($vmId)"
@@ -551,6 +711,12 @@ function Process-VM {
         Write-Error $errorMsg
         Add-Content -Path $errorLog -Value $errorMsg
         Send-Telemetry -EventName "Error" -Properties @{VM = $vmId; Error = $_}
+        
+        return @{
+            Success = $false
+            VMName = $vmId
+            Error = $_
+        }
     }
 }
 
@@ -558,7 +724,7 @@ $scriptRunID = [guid]::NewGuid().ToString()
 Write-Host "Script Run ID: $scriptRunID"
 
 # Load configuration file
-$config = Get-Configuration -configFilePath ".\config.json"
+$config = Get-Configuration -configFilePath (Join-Path -Path $PSScriptRoot -ChildPath "config.json")
 
 # Extract configuration values
 $vmResourceIds = $config.vmResourceIds
@@ -569,6 +735,7 @@ $confirmBeforeProceeding = if ($config.confirmBeforeProceeding -eq "true") { $tr
 $persistOSDisk = if ($config.persistOSDisk -eq "true") { $true } else { $false }
 $deleteVMs = if ($config.deleteVMs -eq "true") { $true } else { $false }
 $enableTelemetry = if ($config.enableTelemetry -eq "true") { $true } else { $false }
+$generateIaasVmIacTemplateDiskConfig = if ($config.generateIaasVmIacTemplateDiskConfig -eq "true") { $true } else { $false }
 
 # Print values of all the configs parsed
 Write-Host "Parsed Configuration Values:"
@@ -579,6 +746,7 @@ Write-Host "Target Disk Subscription: $targetDiskSub"
 Write-Host "Confirm Before Proceeding: $confirmBeforeProceeding"
 Write-Host "Persist OS Disk: $persistOSDisk"
 Write-Host "Delete VMs: $deleteVMs"
+Write-Host "Generate IaaS VM IAC Template Disk Config: $generateIaasVmIacTemplateDiskConfig"
 
 # Validate configuration values
 if (-Not $vmResourceIds -or $vmResourceIds.Count -eq 0) {
@@ -632,9 +800,10 @@ if ($confirmBeforeProceeding -eq $true) {
 }
 
 # Output Directories
-$outputDir = ".\VM_Disk_IAC"  # Directory for IaC snippets
-$errorLog = ".\error_log.txt"  # Log file for errors
-$logFile = ".\logfile.txt"  # Log file for telemetry
+$scriptDir = $PSScriptRoot
+$outputDir = Join-Path -Path $scriptDir -ChildPath "VM_Disk_IAC"  # Directory for IaC snippets
+$errorLog = Join-Path -Path $scriptDir -ChildPath "error_log.txt"  # Log file for errors
+$logFile = Join-Path -Path $scriptDir -ChildPath "logfile.txt"  # Log file for telemetry
 
 # Create output directory and clear error log
 New-Item -Path $outputDir -ItemType Directory -Force | Out-Null
@@ -647,8 +816,59 @@ Send-AzMigrateTelemetry -EventName "ProcessDiskMigration" -ScriptRunId $scriptRu
 }
 
 # Main script execution
+$vmProcessingResults = @()
 foreach ($vmId in $vmResourceIds) {
-    Process-VM -vmId $vmId -vmNicInfo $vmNicInfo -outputDir $outputDir -errorLog $errorLog -deleteNics $deleteNics -deleteVMs $deleteVMs -persistOSDisk $persistOSDisk -targetDiskRG $targetDiskRG -targetDiskSub $targetDiskSub
+    $result = Process-VM -vmId $vmId -vmNicInfo $vmNicInfo -outputDir $outputDir -errorLog $errorLog -deleteNics $deleteNics -deleteVMs $deleteVMs -persistOSDisk $persistOSDisk -targetDiskRG $targetDiskRG -targetDiskSub $targetDiskSub -generateIaasVmIacTemplateDiskConfig $generateIaasVmIacTemplateDiskConfig
+    if ($result -and $result.Success) {
+        $vmProcessingResults += $result
+    }
+}
+
+# Generate consolidated disk-config.json after all VMs are processed
+if ($generateIaasVmIacTemplateDiskConfig -and $vmProcessingResults.Count -gt 0) {
+    Write-Host "Generating consolidated disk-config.json from target disks..." -ForegroundColor Yellow
+    
+    # Get all target disk names from the target resource group
+    try {
+        # Switch to target subscription if different
+        $currentContext = Get-AzContext
+        if ($targetDiskSub -and $targetDiskSub -ne $currentContext.Subscription.Id.ToLower()) {
+            Set-AzContext -SubscriptionId $targetDiskSub -ErrorAction Stop
+        }
+        
+        # Get all disks in target resource group
+        $targetDisks = Get-AzDisk -ResourceGroupName $targetDiskRG -ErrorAction Stop
+        $allTargetDiskNames = $targetDisks | Select-Object -ExpandProperty Name
+        
+        # Consolidate all original disk info from all VMs
+        $consolidatedDiskInfo = @{}
+        foreach ($vmResult in $vmProcessingResults) {
+            foreach ($diskName in $vmResult.OriginalDiskInfo.Keys) {
+                # For target disks, we need to match by potential naming patterns
+                # Find matching target disk name (could have suffix)
+                $matchingTargetDisk = $allTargetDiskNames | Where-Object { 
+                    $_ -eq $diskName -or $_ -like "$diskName-new-*" 
+                }
+                
+                if ($matchingTargetDisk) {
+                    $consolidatedDiskInfo[$matchingTargetDisk] = $vmResult.OriginalDiskInfo[$diskName]
+                }
+            }
+        }
+        
+        # Generate disk-config.json using actual target disk names
+        if ($consolidatedDiskInfo.Count -gt 0) {
+            Generate-DiskConfigJson -vmName "" -targetDiskRG $targetDiskRG -targetDiskSub $targetDiskSub -outputDir $outputDir -targetDiskNames $consolidatedDiskInfo.Keys -originalDiskInfo $consolidatedDiskInfo
+        }
+        
+        # Switch back to original context
+        if ($targetDiskSub -and $targetDiskSub -ne $currentContext.Subscription.Id.ToLower()) {
+            Set-AzContext -SubscriptionId $currentContext.Subscription.Id -ErrorAction SilentlyContinue
+        }
+        
+    } catch {
+        Write-Warning "Could not generate disk-config.json: $_"
+    }
 }
 
 Send-AzMigrateTelemetry -EventName "CompleteDiskMigration" -ScriptRunId $scriptRunID -Properties @{
@@ -657,4 +877,8 @@ Send-AzMigrateTelemetry -EventName "CompleteDiskMigration" -ScriptRunId $scriptR
     Config = $config
 }
 
-Write-Host "Script execution completed. Check '$outputDir' for IAC snippets and '$errorLog' for errors."
+if ($generateIaasVmIacTemplateDiskConfig) {
+    Write-Host "Script execution completed. Check '$outputDir' for IAC snippets, disk-config.json, and '$errorLog' for errors."
+} else {
+    Write-Host "Script execution completed. Check '$outputDir' for IAC snippets and '$errorLog' for errors."
+}
