@@ -1,12 +1,14 @@
 {
     "vmResourceIds": [
-        "/subscriptions/4Bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/akgurg/providers/Microsoft.Compute/virtualMachines/vm17"
+        "/subscriptions/d5f680d7-63d3-4718-b6c6-c91f8221d40d/resourceGroups/hemanrgtf6app-iaas-rg/providers/Microsoft.Compute/virtualMachines/a404-r1w16-5",
+        "/subscriptions/d5f680d7-63d3-4718-b6c6-c91f8221d40d/resourceGroups/hemanrgtf6app-iaas-rg/providers/Microsoft.Compute/virtualMachines/a404-r1w16-15"
     ],
     "deleteNics": "false",
     "deleteVMs": "false",
-    "targetDiskRG": "akgurg",
-    "targetDiskSub": "4Bd2aa0f-2bd2-4d67-91a8-5a4533d58600",
-    "persistOSDisk": "true",
+    "targetDiskRG": "hemanrgtfdemo5rg",
+    "targetDiskSub": "d5f680d7-63d3-4718-b6c6-c91f8221d40d",
+    "persistOSDisk": "false",
     "confirmBeforeProceeding": "true",
-    "enableTelemetry": "true"
+    "enableTelemetry": "true",
+    "generateIaasVmIacTemplateDiskConfig": "true"
 }
