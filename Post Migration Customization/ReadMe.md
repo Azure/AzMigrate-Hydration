@@ -44,9 +44,14 @@ The script relies on the `config.json` file to define the operations and resourc
   - Specifies whether to prompt for confirmation before proceeding. Accepts `"true"` or `"false"`.
   - **Impact**: If `"true"`, the script will prompt for confirmation before executing operations. If `"false"`, the script will proceed without confirmation.
 
-  - **`enableTelemetry`**:
+- **`enableTelemetry`**:
   - Specifies whether to enable telemetry. Accepts `"true"` or `"false"`.
   - **Impact**: If `"true"`, telemetry events will be sent. If `"false"`, telemetry will be disabled.
+
+- **`generateIaasVmIacTemplateDiskConfig`**:
+  - Specifies whether to generate a disk configuration JSON file for IaaS VM IAC templates. Accepts `"true"` or `"false"`.
+  - **Impact**: If `"true"`, generates a `disk-config.json` file in the `VM_Disk_IAC` directory containing disk configuration details that can be consumed by IAC templates generated using Azure Migrate Generate IaC flow for IaaS VMs Lift and Shift strategy. If `"false"`, only Terraform `.tf` files are generated.
+  - **Output**: Creates a structured JSON file with disk properties including VM name, disk name, size, storage type, caching settings, LUN numbers, and metadata tags for each disk processed.
 
 ## How to Use
 1. **Prepare the Configuration File**:
@@ -70,6 +75,7 @@ The script relies on the `config.json` file to define the operations and resourc
 
 4. **Check Outputs**:
    - IaC snippets will be generated in the `VM_Disk_IAC` directory.
+   - If `generateIaasVmIacTemplateDiskConfig` is enabled, a `disk-config.json` file will be created in the `VM_Disk_IAC` directory.
    - Errors will be logged in the `error_log.txt` file.
    - Telemetry logs will be saved in the `logfile.txt` file.
 
@@ -146,6 +152,7 @@ Replace `<resource-group-name>` and `<vm-name>` with the appropriate values.
     "targetDiskRG": "targetRG",
     "targetDiskSub": "c6570921-c122-407e-ae0c-d496d7aa05f8",
     "persistOSDisk": "true",
+    "generateIaasVmIacTemplateDiskConfig": "true",
     "confirmBeforeProceeding": "true",
     "enableTelemetry": "true"
 }
